@@ -18,4 +18,18 @@ MonoBehaviour:
   isp: 200
   dragCoefficient: 0.5
   referenceArea: 0.02
-  pitchProgram: []
+  pitchProgram:
+  - time: 0
+    pitchDeg: 90
+  - time: 5
+    pitchDeg: 88
+  - time: 10
+    pitchDeg: 80
+  - time: 15
+    pitchDeg: 70
+  - time: 20
+    pitchDeg: 60
+  - time: 25
+    pitchDeg: 45
+  - time: 30
+    pitchDeg: 30

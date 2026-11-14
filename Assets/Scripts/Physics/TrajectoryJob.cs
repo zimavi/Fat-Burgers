@@ -27,6 +27,7 @@ public struct TrajectoryState
 public struct TrajectorySample
 {
     public float Time, Altitude, Downrange, Speed, VerticalVel, HorizontalVel, Mass, Fuel, Pitch;
+    public float Q, Heating;  // Pa, and heating index sqrt(rho) * v^3 (relative only, not a temperature)
     public bool ThrustOn;
 }
 
@@ -52,15 +53,18 @@ public static class FlightStep
 {
     public static bool ThrustOn(in TrajectoryState s, in TrajectoryParams p) => s.Fuel > 0f && p.Thrust > 0f;
 
+    // Exponential atmosphere, shared by the step and the sample output.
+    public static float Density(float altitude, in TrajectoryParams p) =>
+        p.Rho0 * math.exp(-math.max(altitude, 0f) / p.ScaleHeight);
+
     // Semi-implicit Euler. Returns whether the engine produced thrust during this step.
     public static bool Step(ref TrajectoryState s, in TrajectoryParams p, float pitchRad, float dt)
     {
         float r = math.length(s.Pos);
         float2 up = s.Pos / r;                     // radial unit vector
         float2 downrange = new float2(up.y, -up.x); // local horizontal, toward downrange
-        float h = math.max(r - p.PlanetRadius, 0f);
         float mass = p.DryMass + s.Fuel;
-        float rho = p.Rho0 * math.exp(-h / p.ScaleHeight);
+        float rho = Density(r - p.PlanetRadius, p);
         float speed = math.length(s.Vel);
 
         float2 acc = -p.G0 * p.PlanetRadius * p.PlanetRadius / (r * r) * up;     // radial gravity, inverse square
@@ -114,17 +118,22 @@ public struct TrajectoryJob : IJob
         float r = math.length(s.Pos);
         float2 up = s.Pos / r;
         float2 downrange = new float2(up.y, -up.x);
+        float altitude = r - P.PlanetRadius;
+        float speed = math.length(s.Vel);
+        float rho = FlightStep.Density(altitude, P);
         return new TrajectorySample
         {
             Time = s.Time,
-            Altitude = r - P.PlanetRadius,
+            Altitude = altitude,
             Downrange = P.PlanetRadius * math.atan2(s.Pos.x, s.Pos.y),
-            Speed = math.length(s.Vel),
+            Speed = speed,
             VerticalVel = math.dot(s.Vel, up),
             HorizontalVel = math.dot(s.Vel, downrange),
             Mass = P.DryMass + s.Fuel,
             Fuel = s.Fuel,
             Pitch = pitch,
+            Q = 0.5f * rho * speed * speed,
+            Heating = math.sqrt(rho) * speed * speed * speed,
             ThrustOn = thrustOn,
         };
     }
