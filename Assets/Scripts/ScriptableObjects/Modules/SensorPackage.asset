@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: SensorPackage
   m_EditorClassIdentifier: Assembly-CSharp::ModuleData
   displayName: Sensor package
-  description: "Instruments that look at what the atmosphere hides. Ultraviolet and X-ray light are absorbed well below 100 km, so a rocket is the only way to measure them directly."
   isBase: 0
   isFairing: 0
   sprite: {fileID: 0}
+  icon: {fileID: 6657456218274127723, guid: d682d768221e3f34d9fa36a7a6ca5c7b, type: 3}
+  description: Instruments that look at what the atmosphere hides. Ultraviolet and X-ray light are absorbed well below 100 km, so a rocket is the only way to measure them directly.
   placeholderColor: {r: 0.5, g: 0.85, b: 0.6, a: 1}
   size: {x: 90, y: 30}
   mass: 3
@@ -26,6 +27,6 @@ MonoBehaviour:
   dragCoefficient: 0.5
   referenceArea: 0.01
   scienceValue: 10
+  allowedChildren: []
   maxChildren: 0
   maxInstances: 1
-  allowedChildren: []

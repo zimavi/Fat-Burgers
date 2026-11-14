@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: AerobeeTank
   m_EditorClassIdentifier: Assembly-CSharp::ModuleData
   displayName: Aerobee 150 propellant tanks
-  description: "Propellant for the Aerobee 150: red fuming nitric acid and an aniline-based fuel. The two ignite on contact and stay liquid at room temperature, so the engine needs no igniter and no cryogenics."
   isBase: 0
   isFairing: 0
   sprite: {fileID: 0}
+  icon: {fileID: 6700672401504489967, guid: 156812dd0800d82469ca74edea11b0c9, type: 3}
+  description: 'Propellant for the Aerobee 150: red fuming nitric acid and an aniline-based fuel. The two ignite on contact and stay liquid at room temperature, so the engine needs no igniter and no cryogenics.'
   placeholderColor: {r: 0.55, g: 0.65, b: 0.75, a: 1}
   size: {x: 110, y: 90}
   mass: 69
@@ -26,7 +27,7 @@ MonoBehaviour:
   dragCoefficient: 0.5
   referenceArea: 0.1
   scienceValue: 0
-  maxChildren: 1
-  maxInstances: 1
   allowedChildren:
   - {fileID: 11400000, guid: c07404a0c0b041b5b420649aa097e4e8, type: 2}
+  maxChildren: 1
+  maxInstances: 1

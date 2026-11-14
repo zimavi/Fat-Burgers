@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: BlackBrantMotor
   m_EditorClassIdentifier: Assembly-CSharp::ModuleData
   displayName: Black Brant VC solid motor
-  description: "A solid motor from Canada's Black Brant line, which flew for decades. It burns for about 27 seconds at over 75 kN, and once lit it cannot be throttled or shut off."
   isBase: 0
   isFairing: 0
   sprite: {fileID: 0}
+  icon: {fileID: -8891009156502600641, guid: 4490077dda2583649b666568f1c362d3, type: 3}
+  description: A solid motor from Canada's Black Brant line, which flew for decades. It burns for about 27 seconds at over 75 kN, and once lit it cannot be throttled or shut off.
   placeholderColor: {r: 0.95, g: 0.6, b: 0.2, a: 1}
   size: {x: 130, y: 110}
   mass: 150
@@ -26,6 +27,6 @@ MonoBehaviour:
   dragCoefficient: 0.5
   referenceArea: 0.13
   scienceValue: 0
+  allowedChildren: []
   maxChildren: 0
   maxInstances: 1
-  allowedChildren: []

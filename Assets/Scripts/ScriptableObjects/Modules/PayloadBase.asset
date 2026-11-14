@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: PayloadBase
   m_EditorClassIdentifier: Assembly-CSharp::ModuleData
   displayName: Payload base
-  description: "The science deck of the flight. It rides to apogee and back, so every gram here is a gram the motor has to lift."
   isBase: 1
   isFairing: 0
   sprite: {fileID: 0}
+  icon: {fileID: 2210224565589994808, guid: e995bd5f4f7144941b6b99f4fa2a9b26, type: 3}
+  description: The science deck of the flight. It rides to apogee and back, so every gram here is a gram the motor has to lift.
   placeholderColor: {r: 0.4, g: 0.6, b: 0.9, a: 1}
   size: {x: 120, y: 40}
   mass: 5

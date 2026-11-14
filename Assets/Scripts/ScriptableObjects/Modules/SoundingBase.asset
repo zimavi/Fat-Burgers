@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: SoundingBase
   m_EditorClassIdentifier: Assembly-CSharp::ModuleData
   displayName: Sounding base
-  description: "The spine of the rocket. It carries the thrust from the motors below and the weight of everything above. Structure is dead mass, so each kilogram saved is altitude gained."
   isBase: 1
   isFairing: 0
   sprite: {fileID: 0}
+  icon: {fileID: -5414617196416004988, guid: 347e6b3c46914d54e89b4de95fc67d95, type: 3}
+  description: The spine of the rocket. It carries the thrust from the motors below and the weight of everything above. Structure is dead mass, so each kilogram saved is altitude gained.
   placeholderColor: {r: 0.7, g: 0.4, b: 0.2, a: 1}
   size: {x: 120, y: 40}
   mass: 40
@@ -26,8 +27,8 @@ MonoBehaviour:
   dragCoefficient: 0.5
   referenceArea: 0.1
   scienceValue: 0
-  maxChildren: 2
-  maxInstances: 0
   allowedChildren:
   - {fileID: 11400000, guid: 6c170218fd6c4edc98e4eadb95b84abe, type: 2}
   - {fileID: 11400000, guid: 47cad25bcf824ca69bd2b43f6487f8ba, type: 2}
+  maxChildren: 2
+  maxInstances: 0
