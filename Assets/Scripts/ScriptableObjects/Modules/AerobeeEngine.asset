@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 099f1f6caf9e463692fd3ca45c223f51, type: 3}
+  m_Name: AerobeeEngine
+  m_EditorClassIdentifier: Assembly-CSharp::ModuleData
+  displayName: AJ10 sustainer (Aerobee 150)
+  description: "The AJ10 sustainer that burns for about 50 seconds. The AJ10 family later went to space: the Apollo service module engine descends from it."
+  isBase: 0
+  isFairing: 0
+  sprite: {fileID: 0}
+  placeholderColor: {r: 0.85, g: 0.4, b: 0.2, a: 1}
+  size: {x: 90, y: 50}
+  mass: 60
+  fuelMass: 0
+  thrust: 18200
+  isp: 200
+  dragCoefficient: 0.5
+  referenceArea: 0.1
+  scienceValue: 0
+  maxChildren: 0
+  maxInstances: 1
+  allowedChildren: []
