@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 099f1f6caf9e463692fd3ca45c223f51, type: 3}
+  m_Name: AerobeeTank
+  m_EditorClassIdentifier: Assembly-CSharp::ModuleData
+  displayName: Aerobee 150 propellant tanks
+  description: "Propellant for the Aerobee 150: red fuming nitric acid and an aniline-based fuel. The two ignite on contact and stay liquid at room temperature, so the engine needs no igniter and no cryogenics."
+  isBase: 0
+  isFairing: 0
+  sprite: {fileID: 0}
+  placeholderColor: {r: 0.55, g: 0.65, b: 0.75, a: 1}
+  size: {x: 110, y: 90}
+  mass: 69
+  fuelMass: 478
+  thrust: 0
+  isp: 200
+  dragCoefficient: 0.5
+  referenceArea: 0.1
+  scienceValue: 0
+  maxChildren: 1
+  maxInstances: 1
+  allowedChildren:
+  - {fileID: 11400000, guid: c07404a0c0b041b5b420649aa097e4e8, type: 2}

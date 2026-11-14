@@ -12,24 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea3dacc3eaf69d4eaf9494178b39fee, type: 3}
   m_Name: SampleRocket
   m_EditorClassIdentifier: Assembly-CSharp::RocketData
-  dryMass: 40
-  fuelMass: 60
-  thrust: 5000
-  isp: 200
+  dryMass: 30
+  fuelMass: 72
+  thrust: 2000
+  isp: 250
   dragCoefficient: 0.5
-  referenceArea: 0.02
+  referenceArea: 0.04
   pitchProgram:
   - time: 0
     pitchDeg: 90
-  - time: 5
-    pitchDeg: 88
-  - time: 10
-    pitchDeg: 80
-  - time: 15
-    pitchDeg: 70
   - time: 20
-    pitchDeg: 60
-  - time: 25
-    pitchDeg: 45
-  - time: 30
-    pitchDeg: 30
+    pitchDeg: 85

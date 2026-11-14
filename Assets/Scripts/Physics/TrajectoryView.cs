@@ -62,13 +62,8 @@ public class TrajectoryView : MonoBehaviour
         var pitch = new NativeArray<float2>(keys.Length, Allocator.TempJob);
         for (int i = 0; i < keys.Length; i++) pitch[i] = new float2(keys[i].time, math.radians(keys[i].pitchDeg));
 
-        var p = new TrajectoryParams
-        {
-            DryMass = rocket.dryMass, Thrust = rocket.thrust, Isp = rocket.isp,
-            Cd = rocket.dragCoefficient, Area = rocket.referenceArea,
-            G0 = planet.g0, PlanetRadius = planet.radius, Rho0 = planet.seaLevelDensity, ScaleHeight = planet.scaleHeight,
-        };
-        var start = new TrajectoryState { Pos = new float2(0f, p.PlanetRadius), Vel = float2.zero, Fuel = rocket.fuelMass, Time = 0f };
+        var p = FlightSetup.Params(rocket, planet);
+        var start = FlightSetup.Pad(p, rocket.fuelMass);
         var samples = new NativeList<TrajectorySample>(1024, Allocator.TempJob);
 
         new TrajectoryJob { P = p, Pitch = pitch, Start = start, Samples = samples }.Schedule().Complete();
@@ -175,6 +170,6 @@ public class TrajectoryView : MonoBehaviour
 
         var e = events[best];
         tooltipText.text = $"<b>{FlightEvents.Name(e.Type)}</b>\n{FlightEvents.Description(e.Type)}\n\n{FlightEvents.Details(e)}";
-        tooltip.transform.position = mouse + new Vector2(15f, -15f);  // offset from cursor
+        tooltip.transform.position = mouse + new Vector2(20f, -20f);  // offset from cursor
     }
 }

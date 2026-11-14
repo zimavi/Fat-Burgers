@@ -40,9 +40,9 @@ public static class FlightEvents
 
     // Telemetry at the event, formatted for the tooltip.
     public static string Details(in FlightEvent e) =>
-        $"T+ {e.Time:0.0} s   Altitude {e.Altitude / 1000f:0.0} km   Downrange {e.Downrange / 1000f:0.0} km\n" +
-        $"Speed {e.Speed:0} m/s   Vertical {e.VerticalVel:0} m/s   Pitch {math.degrees(e.Pitch):0}°\n" +
-        $"Q {e.Q / 1000f:0.0} kPa   Heating {e.Heating:0.0e0}   Mass {e.Mass:0.0} kg";
+        $"T+{e.Time:0.0} s   Altitude: {e.Altitude / 1000f:0.0} km   Downrange: {e.Downrange / 1000f:0.0} km\n" +
+        $"Speed: {e.Speed:0} m/s   Vertical: {e.VerticalVel:0} m/s   Pitch: {math.degrees(e.Pitch):0}°\n" +
+        $"Q: {e.Q / 1000f:0.0} kPa   Heating: {e.Heating:0.0e0}   Mass: {e.Mass:0.0} kg";
 
     public static List<FlightEvent> Detect(NativeList<TrajectorySample> s)
     {

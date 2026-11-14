@@ -16,3 +16,4 @@ MonoBehaviour:
   radius: 6371000
   seaLevelDensity: 1.225
   scaleHeight: 8500
+  angularVelocity: 7.2921159e-05
