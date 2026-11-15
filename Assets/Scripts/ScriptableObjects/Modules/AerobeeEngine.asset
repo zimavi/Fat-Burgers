@@ -15,6 +15,7 @@ MonoBehaviour:
   displayName: AJ10 sustainer (Aerobee 150)
   isBase: 0
   isFairing: 0
+  specialType: 0
   sprite: {fileID: 0}
   icon: {fileID: -8891009156502600641, guid: 4490077dda2583649b666568f1c362d3, type: 3}
   description: 'The AJ10 sustainer that burns for about 50 seconds. The AJ10 family later went to space: the Apollo service module engine descends from it.'
@@ -27,6 +28,7 @@ MonoBehaviour:
   dragCoefficient: 0.5
   referenceArea: 0.1
   scienceValue: 0
-  allowedChildren: []
+  allowedChildren:
+  - {fileID: 11400000, guid: 01bb4470b6419a348b1e1630c65e539d, type: 2}
   maxChildren: 0
   maxInstances: 1

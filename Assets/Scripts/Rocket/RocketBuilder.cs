@@ -334,7 +334,7 @@ public class RocketBuilder : MonoBehaviour
     void Refresh()
     {
         HideTooltip();  // the cards it was hovering are about to be destroyed
-        RocketAssembly.Apply(rocketRoot.Walk().Concat(payloadRoot.Walk()).Select(n => n.data), runtimeRocket);
+        RocketAssembly.Apply(new[] { rocketRoot, payloadRoot }, runtimeRocket);
         if (trajectory)
         {
             trajectory.rocket = runtimeRocket;

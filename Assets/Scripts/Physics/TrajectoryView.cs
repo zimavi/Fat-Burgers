@@ -63,6 +63,7 @@ public class TrajectoryView : MonoBehaviour
         for (int i = 0; i < keys.Length; i++) pitch[i] = new float2(keys[i].time, math.radians(keys[i].pitchDeg));
 
         var p = FlightSetup.Params(rocket, planet);
+        if (p.ChuteCdA > 0f) p.ChuteDeployAltitude = ChuteSolver.Solve(rocket, planet, pitch).Altitude;  // best parachute opening for this flight
         var start = FlightSetup.Pad(p, rocket.fuelMass);
         var samples = new NativeList<TrajectorySample>(1024, Allocator.TempJob);
 

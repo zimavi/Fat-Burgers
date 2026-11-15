@@ -15,6 +15,7 @@ MonoBehaviour:
   displayName: Payload base
   isBase: 1
   isFairing: 0
+  specialType: 0
   sprite: {fileID: 0}
   icon: {fileID: 2210224565589994808, guid: e995bd5f4f7144941b6b99f4fa2a9b26, type: 3}
   description: The science deck of the flight. It rides to apogee and back, so every gram here is a gram the motor has to lift.
@@ -31,5 +32,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d28a2cdf4305492fa3f40538445bff34, type: 2}
   - {fileID: 11400000, guid: 07ca38727ae243428cf8fe1559b1b714, type: 2}
   - {fileID: 11400000, guid: 6427d3985e039a7408765f416d53e184, type: 2}
-  maxChildren: 2
+  - {fileID: 11400000, guid: 988c8ae197387834cbd9298d9f351cd3, type: 2}
+  - {fileID: 11400000, guid: 960dd4749b00d674db25937a275db9a7, type: 2}
+  - {fileID: 11400000, guid: 1275c9186677f3841b6915232e3aa0f5, type: 2}
+  - {fileID: 11400000, guid: 1414e1a7bc13d194b8c207a3d92fe3b0, type: 2}
+  maxChildren: 4
   maxInstances: 0

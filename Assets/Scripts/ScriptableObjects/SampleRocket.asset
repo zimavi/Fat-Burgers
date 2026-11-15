@@ -16,8 +16,15 @@ MonoBehaviour:
   fuelMass: 72
   thrust: 2000
   isp: 250
-  dragCoefficient: 0.5
-  referenceArea: 0.04
+  dragCdA: {x: 0, y: 0, z: 0, w: 0}
+  chuteCdA: 0
+  shieldCdA: 0
+  heatScale: 1
+  fairingMass: 0
+  decouplerMass: 0
+  chuteDeployMin: 3000
+  chuteDeployMax: 10000
+  maxChuteQ: 40000
   pitchProgram:
   - time: 0
     pitchDeg: 90

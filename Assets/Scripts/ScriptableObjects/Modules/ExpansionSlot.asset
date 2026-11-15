@@ -15,7 +15,10 @@ MonoBehaviour:
   displayName: Expansion Slot
   isBase: 0
   isFairing: 0
+  specialType: 0
   sprite: {fileID: 0}
+  icon: {fileID: 0}
+  description: 
   placeholderColor: {r: 0.8867924, g: 0.36391956, b: 0.36391956, a: 1}
   size: {x: 120, y: 40}
   mass: 3
@@ -28,5 +31,6 @@ MonoBehaviour:
   allowedChildren:
   - {fileID: 11400000, guid: d28a2cdf4305492fa3f40538445bff34, type: 2}
   - {fileID: 11400000, guid: 960dd4749b00d674db25937a275db9a7, type: 2}
+  - {fileID: 11400000, guid: 988c8ae197387834cbd9298d9f351cd3, type: 2}
   maxChildren: 3
   maxInstances: 1

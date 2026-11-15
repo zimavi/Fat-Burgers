@@ -14,9 +14,13 @@ public struct TrajectoryParams
     public float DryMass;                                 // kg
     public float Thrust;                                  // N, burns until propellant is gone
     public float Isp;                                     // s
-    public float Cd, Area;                                // drag coefficient, reference area (m^2)
+    public float4 DragCdA;                                // m^2, base Cd*A per drop state (index = Separated | Jettisoned bits)
     public float G0, PlanetRadius, Rho0, ScaleHeight;     // Earth: 9.80665, 6371000 m, 1.225 kg/m^3, 8500 m
     public float Omega;                                   // rad/s, planet rotation (Earth: 7.2921159e-5)
+    public float ChuteCdA, ShieldCdA;                     // m^2, parachute / heat shield drag area, added when deployed
+    public float ChuteDeployAltitude;                     // m, parachutes open on descent below this
+    public float HeatScale;                               // heating index multiplier (heat shield)
+    public float DecouplerMass, FairingMass;              // kg dropped at MECO (decoupler) and at 100 km (fairing)
 }
 
 public struct TrajectoryState
@@ -24,13 +28,22 @@ public struct TrajectoryState
     public float2 Pos, Vel;  // m, m/s, planet-centred
     public float Fuel;       // kg
     public float Time;       // s, mission elapsed time
+    public byte Flags;       // FlightFlags bits
 }
 
 public struct TrajectorySample
 {
+    // Speed, VerticalVel, HorizontalVel are air-relative (ground-relative at the surface). Downrange is Earth-fixed.
     public float Time, Altitude, Downrange, Speed, VerticalVel, HorizontalVel, Mass, Fuel, Pitch;
     public float Q, Heating;  // Pa, and heating index sqrt(rho) * v^3 (relative only, not a temperature)
     public bool ThrustOn;
+    public byte Flags;  // FlightFlags bits
+}
+
+// One-way switches set during the flight. Samples carry them, so event detection finds the transition sample.
+public static class FlightFlags
+{
+    public const byte Separated = 1, Jettisoned = 2, ChuteOn = 4, AboveBoundary = 8, ShieldOn = 16;
 }
 
 public static class PitchProgram
@@ -62,19 +75,43 @@ public static class FlightStep
     // Air moves with the planet: at pos it has velocity Omega x pos (east at the pad). Drag and dynamic pressure use the air-relative velocity.
     public static float2 AirVelocity(in float2 pos, in TrajectoryParams p) => p.Omega * new float2(pos.y, -pos.x);
 
+    // Dropped modules leave the vehicle: decoupler at MECO, fairing at 100 km.
+    public static float Mass(in TrajectoryState s, in TrajectoryParams p) =>
+        p.DryMass + s.Fuel
+        - ((s.Flags & FlightFlags.Separated) != 0 ? p.DecouplerMass : 0f)
+        - ((s.Flags & FlightFlags.Jettisoned) != 0 ? p.FairingMass : 0f);
+
+    // Parachute opens on descent below its planned altitude. Heat shield takes over on the way back below 100 km.
+    static void Deployments(ref TrajectoryState s, in TrajectoryParams p, float altitude, float vertical)
+    {
+        if (p.ChuteCdA > 0f && vertical < 0f && altitude <= p.ChuteDeployAltitude) s.Flags |= FlightFlags.ChuteOn;
+        if (altitude >= FlightEvents.BoundaryAltitude)
+        {
+            s.Flags |= FlightFlags.AboveBoundary;
+            if (p.FairingMass > 0f) s.Flags |= FlightFlags.Jettisoned;
+        }
+        if ((s.Flags & FlightFlags.AboveBoundary) != 0 && vertical < 0f && altitude < FlightEvents.BoundaryAltitude)
+            s.Flags |= FlightFlags.ShieldOn;
+    }
+
     // Semi-implicit Euler. Returns whether the engine produced thrust during this step.
     public static bool Step(ref TrajectoryState s, in TrajectoryParams p, float pitchRad, float dt)
     {
         float r = math.length(s.Pos);
         float2 up = s.Pos / r;                     // radial unit vector
         float2 downrange = new float2(up.y, -up.x); // local horizontal, toward downrange
-        float mass = p.DryMass + s.Fuel;
-        float rho = Density(r - p.PlanetRadius, p);
+        float altitude = r - p.PlanetRadius;
+        Deployments(ref s, p, altitude, math.dot(s.Vel, up));
+        float mass = Mass(s, p);
+        float rho = Density(altitude, p);
         float2 relVel = s.Vel - AirVelocity(s.Pos, p);
         float speed = math.length(relVel);
+        float cdA = p.DragCdA[s.Flags & (FlightFlags.Separated | FlightFlags.Jettisoned)]
+                  + ((s.Flags & FlightFlags.ChuteOn) != 0 ? p.ChuteCdA : 0f)
+                                  + ((s.Flags & FlightFlags.ShieldOn) != 0 ? p.ShieldCdA : 0f);
 
         float2 acc = -p.G0 * p.PlanetRadius * p.PlanetRadius / (r * r) * up;     // radial gravity, inverse square
-        acc -= 0.5f * rho * speed * p.Cd * p.Area / mass * relVel;              // drag opposes velocity relative to air
+        acc -= 0.5f * rho * speed * cdA / mass * relVel;                        // drag opposes velocity relative to air
 
         bool thrustOn = ThrustOn(s, p);
         float burn = 0f;
@@ -88,6 +125,7 @@ public static class FlightStep
         s.Pos += s.Vel * dt;
         s.Fuel -= burn;
         s.Time += dt;
+        if (burn > 0f && s.Fuel <= 0f && p.DecouplerMass > 0f) s.Flags |= FlightFlags.Separated;  // MECO fires the decoupler
         return thrustOn;
     }
 }
@@ -98,9 +136,11 @@ public static class FlightSetup
     public static TrajectoryParams Params(RocketData rocket, PlanetData planet) => new TrajectoryParams
     {
         DryMass = rocket.dryMass, Thrust = rocket.thrust, Isp = rocket.isp,
-        Cd = rocket.dragCoefficient, Area = rocket.referenceArea,
+        DragCdA = new float4(rocket.dragCdA.x, rocket.dragCdA.y, rocket.dragCdA.z, rocket.dragCdA.w),
         G0 = planet.g0, PlanetRadius = planet.radius, Rho0 = planet.seaLevelDensity, ScaleHeight = planet.scaleHeight,
         Omega = planet.angularVelocity,
+        ChuteCdA = rocket.chuteCdA, ShieldCdA = rocket.shieldCdA, ChuteDeployAltitude = rocket.chuteDeployMin,
+        HeatScale = rocket.heatScale, DecouplerMass = rocket.decouplerMass, FairingMass = rocket.fairingMass,
     };
 
     // The pad already moves with the planet's rotation, eastward (+x, the downrange direction there).
@@ -147,23 +187,25 @@ public struct TrajectoryJob : IJob
         float2 up = s.Pos / r;
         float2 downrange = new float2(up.y, -up.x);
         float altitude = r - P.PlanetRadius;
-        float speed = math.length(s.Vel);
+        // Air-relative velocity: the air co-rotates with the ground, so at the surface this is the speed over the ground.
+        float2 relVel = s.Vel - FlightStep.AirVelocity(s.Pos, P);
+        float speed = math.length(relVel);
         float rho = FlightStep.Density(altitude, P);
-        float airSpeed = math.length(s.Vel - FlightStep.AirVelocity(s.Pos, P));
         return new TrajectorySample
         {
             Time = s.Time,
             Altitude = altitude,
             Downrange = P.PlanetRadius * (math.atan2(s.Pos.x, s.Pos.y) - P.Omega * s.Time),  // ground track, Earth-fixed
             Speed = speed,
-            VerticalVel = math.dot(s.Vel, up),
-            HorizontalVel = math.dot(s.Vel, downrange),
-            Mass = P.DryMass + s.Fuel,
+            VerticalVel = math.dot(relVel, up),
+            HorizontalVel = math.dot(relVel, downrange),
+            Mass = FlightStep.Mass(s, P),
             Fuel = s.Fuel,
             Pitch = pitch,
-            Q = 0.5f * rho * airSpeed * airSpeed,
-            Heating = math.sqrt(rho) * airSpeed * airSpeed * airSpeed,
+            Q = 0.5f * rho * speed * speed,
+            Heating = math.sqrt(rho) * speed * speed * speed * P.HeatScale,
             ThrustOn = thrustOn,
+            Flags = s.Flags,
         };
     }
 
@@ -175,7 +217,7 @@ public struct TrajectoryJob : IJob
     // Drag-free, thrust-free vertical throw from the pad: apex must equal v^2 / (2 g0).
     public static bool SelfCheck()
     {
-        var p = new TrajectoryParams { DryMass = 100f, Thrust = 0f, Isp = 200f, Cd = 0f, Area = 1f, G0 = 9.80665f, PlanetRadius = 6371000f, Rho0 = 1.225f, ScaleHeight = 8500f };
+        var p = new TrajectoryParams { DryMass = 100f, Thrust = 0f, Isp = 200f, DragCdA = float4.zero, G0 = 9.80665f, PlanetRadius = 6371000f, Rho0 = 1.225f, ScaleHeight = 8500f };
         var start = new TrajectoryState { Pos = new float2(0f, p.PlanetRadius), Vel = new float2(0f, 100f) };
         var pitch = new NativeArray<float2>(0, Allocator.Temp);
         var samples = new NativeList<TrajectorySample>(1024, Allocator.TempJob);
@@ -186,6 +228,9 @@ public struct TrajectoryJob : IJob
         samples.Dispose();
 
         float expected = 100f * 100f / (2f * p.G0);
-        return math.abs(apex - expected) < 0.01f * expected;
+        // Once separated, the decoupler's mass is gone: 100 kg dry + 10 kg fuel - 4 kg dropped.
+        p.DecouplerMass = 4f;
+        bool massOk = math.abs(FlightStep.Mass(new TrajectoryState { Fuel = 10f, Flags = FlightFlags.Separated }, p) - 106f) < 1e-4f;
+        return math.abs(apex - expected) < 0.01f * expected && massOk;
     }
 }

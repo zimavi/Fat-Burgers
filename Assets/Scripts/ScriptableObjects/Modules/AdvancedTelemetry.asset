@@ -15,7 +15,10 @@ MonoBehaviour:
   displayName: Advanced Telemetry Module
   isBase: 0
   isFairing: 0
+  specialType: 5
   sprite: {fileID: 0}
+  icon: {fileID: 0}
+  description: 
   placeholderColor: {r: 0.26237094, g: 0.6899552, b: 0.8301887, a: 1}
   size: {x: 120, y: 40}
   mass: 2

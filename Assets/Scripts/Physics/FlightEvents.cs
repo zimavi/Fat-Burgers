@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Mathematics;
 
-public enum FlightEventType { MaxQ, MaxHeating, MECO, Apogee, Boundary100km, Impact }
+public enum FlightEventType { MaxQ, MaxHeating, MECO, Apogee, Boundary100km, Impact, Decoupling, FairingJettison, ParachuteDeploy, Reentry }
 
 public struct FlightEvent
 {
@@ -24,6 +24,10 @@ public static class FlightEvents
         FlightEventType.Apogee => "Apogee",
         FlightEventType.Boundary100km => "100 km Boundary",
         FlightEventType.Impact => "Impact",
+        FlightEventType.Decoupling => "Decoupling",
+        FlightEventType.FairingJettison => "Fairing Jettison",
+        FlightEventType.ParachuteDeploy => "Parachute Deploy",
+        FlightEventType.Reentry => "Reentry",
         _ => t.ToString(),
     };
 
@@ -35,13 +39,17 @@ public static class FlightEvents
         FlightEventType.Apogee => "Highest point of the flight. Vertical speed is zero here, so this is where the vehicle stops climbing.",
         FlightEventType.Boundary100km => "Climbing through 100 km, the usual reference for 'space'. A gameplay line, not an atmospheric edge.",
         FlightEventType.Impact => "The vehicle reaches the surface and the flight ends. Downrange here is where it lands.",
+        FlightEventType.Decoupling => "The decoupler fires at burnout and drops the modules attached to it. The vehicle gets lighter.",
+        FlightEventType.FairingJettison => "The payload fairing is dropped after passing 100 km, shedding its mass.",
+        FlightEventType.ParachuteDeploy => "Parachutes open on the way down. Their drag slows the vehicle toward a gentler landing.",
+        FlightEventType.Reentry => "Descent back through 100 km. Heat shields, if fitted, take the load from here, and the air brakes the vehicle hard.",
         _ => "",
     };
 
     // Telemetry at the event, formatted for the tooltip.
     public static string Details(in FlightEvent e) =>
         $"T+{e.Time:0.0} s   Altitude: {e.Altitude / 1000f:0.0} km   Downrange: {e.Downrange / 1000f:0.0} km\n" +
-        $"Speed: {e.Speed:0} m/s   Vertical: {e.VerticalVel:0} m/s   Pitch: {math.degrees(e.Pitch):0}°\n" +
+        $"Ground speed: {e.Speed:0} m/s   Vertical: {e.VerticalVel:0} m/s   Pitch: {math.degrees(e.Pitch):0}°\n" +
         $"Q: {e.Q / 1000f:0.0} kPa   Heating: {e.Heating:0.0e0}   Mass: {e.Mass:0.0} kg";
 
     public static List<FlightEvent> Detect(NativeList<TrajectorySample> s)
@@ -78,6 +86,11 @@ public static class FlightEvents
             }
         }
 
+        AddFlagEvent(events, s, FlightFlags.Separated, FlightEventType.Decoupling);
+        AddFlagEvent(events, s, FlightFlags.Jettisoned, FlightEventType.FairingJettison);
+        AddFlagEvent(events, s, FlightFlags.ChuteOn, FlightEventType.ParachuteDeploy);
+        AddFlagEvent(events, s, FlightFlags.ShieldOn, FlightEventType.Reentry);
+
         if (n >= 2 && s[n - 2].Altitude > 0f && s[n - 1].Altitude <= 0f)
         {
             float a0 = s[n - 2].Altitude, a1 = s[n - 1].Altitude;
@@ -85,6 +98,13 @@ public static class FlightEvents
         }
 
         return events;
+    }
+
+    // First sample where a flag turns on. Flags start off, so the sample itself is the event.
+    static void AddFlagEvent(List<FlightEvent> events, NativeList<TrajectorySample> s, byte flag, FlightEventType type)
+    {
+        for (int i = 1; i < s.Length; i++)
+            if ((s[i].Flags & flag) != 0 && (s[i - 1].Flags & flag) == 0) { events.Add(Make(s[i], s[i], 0f, type)); return; }
     }
 
     static FlightEvent Make(in TrajectorySample a, in TrajectorySample b, float f, FlightEventType type) => new FlightEvent

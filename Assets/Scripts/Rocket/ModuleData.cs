@@ -8,6 +8,7 @@ public class ModuleData : ScriptableObject
     public string displayName = "Module";
     public bool isBase;                              // tree root
     public bool isFairing;                           // payload fairing, drawn on the sides of the payload stack
+    public SpecialModuleType specialType;            // special module type, for gameplay effects
     public Sprite sprite;                            // null = placeholder rectangle in placeholderColor
     public Sprite icon;                              // shown inside the card's circle; the circle stays plain when empty
     [TextArea] public string description;            // tooltip text under the module name

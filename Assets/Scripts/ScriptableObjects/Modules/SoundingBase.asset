@@ -15,6 +15,7 @@ MonoBehaviour:
   displayName: Sounding base
   isBase: 1
   isFairing: 0
+  specialType: 0
   sprite: {fileID: 0}
   icon: {fileID: -5414617196416004988, guid: 347e6b3c46914d54e89b4de95fc67d95, type: 3}
   description: The spine of the rocket. It carries the thrust from the motors below and the weight of everything above. Structure is dead mass, so each kilogram saved is altitude gained.

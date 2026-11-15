@@ -15,6 +15,7 @@ MonoBehaviour:
   displayName: Fairing
   isBase: 0
   isFairing: 1
+  specialType: 1
   sprite: {fileID: 0}
   icon: {fileID: -2005666645161959836, guid: 311e608938581a041b377536d9c5c3b7, type: 3}
   description: Nose cone that shields the payload through the dense lower atmosphere, then falls away once the air is too thin to matter. Every kilogram of it costs altitude.
