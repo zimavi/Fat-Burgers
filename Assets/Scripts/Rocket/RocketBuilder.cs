@@ -31,7 +31,7 @@ public class RocketBuilder : MonoBehaviour
     public TrajectoryView trajectory;
     [Tooltip("Supplies the pitch program. Its physical stats are overwritten by the assembled rocket.")]
     public RocketData flightProgram;
-    [Tooltip("Blueprint grid behind the workspace. Assign Assets/Sprites/derevo bg.png.")]
+    [Tooltip("Blueprint grid behind the workspace. Assign Sprites/derevo bg.png.")]
     public Sprite blueprintBackground;
 
     static readonly Color PanelColor = new Color(0.03f, 0.06f, 0.09f, 0.92f);

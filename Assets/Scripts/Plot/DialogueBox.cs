@@ -65,14 +65,14 @@ public sealed class DialogueBox : MonoBehaviour
 
         // Low enough that her belt is just under the bottom edge: the legs are off-screen, the head and chest are in view.
         portrait = At(stage, 20, 0, 820, 820, "Portrait").gameObject.AddComponent<Image>();
-        closed = LoadSprite("Assets/Sprites/1FINAL.png");
-        open = LoadSprite("Assets/Sprites/2FINAL.png");
+        closed = LoadSprite("Sprites/1FINAL.png");
+        open = LoadSprite("Sprites/2FINAL.png");
         portrait.sprite = closed;
         portrait.preserveAspect = true;
         portrait.raycastTarget = false;
 
         var boxImg = At(stage, 560, 40, 1320, 300, "TextBox").gameObject.AddComponent<Image>();
-        boxImg.sprite = LoadSprite("Assets/Sprites/Dialogue.png");
+        boxImg.sprite = LoadSprite("Sprites/Dialogue.png");
         boxImg.preserveAspect = true;
         boxImg.raycastTarget = false;
         if (!boxImg.sprite) boxImg.color = new Color(0.6f, 0.6f, 0.6f);  // no art in this build: a plain box
@@ -193,12 +193,5 @@ public sealed class DialogueBox : MonoBehaviour
         t.UpdateMeshPadding();
     }
 
-    static Sprite LoadSprite(string path)
-    {
-#if UNITY_EDITOR
-        foreach (var asset in UnityEditor.AssetDatabase.LoadAllAssetsAtPath(path))
-            if (asset is Sprite s) return s;
-#endif
-        return null;
-    }
+    static Sprite LoadSprite(string path) => ProjectAssets.LoadSprite(path);
 }

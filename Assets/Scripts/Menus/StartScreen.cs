@@ -11,8 +11,8 @@ using UnityEngine.UI;
 // The title art already prints "start", so the START button is placed over that word. Attached by StartScreenBootstrap.
 public class StartScreen : MonoBehaviour
 {
-    const string TitlePath = "Assets/Sprites/Untitled.png";
-    const string CreditsPath = "Assets/Sprites/credits.png";
+    const string TitlePath = "Sprites/Untitled.png";
+    const string CreditsPath = "Sprites/credits.png";
 
     GameObject credits;
 
@@ -111,14 +111,7 @@ public class StartScreen : MonoBehaviour
         return b;
     }
 
-    static Sprite LoadSprite(string path)
-    {
-#if UNITY_EDITOR
-        foreach (var asset in UnityEditor.AssetDatabase.LoadAllAssetsAtPath(path))
-            if (asset is Sprite s) return s;
-#endif
-        return null;
-    }
+    static Sprite LoadSprite(string path) => ProjectAssets.LoadSprite(path);
 }
 
 // Attaches the start screen when its scene loads.

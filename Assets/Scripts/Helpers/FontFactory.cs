@@ -43,9 +43,9 @@ public static class FontFactory
         return fontAsset;
     }
     
-    // Assets/Fonts/PixelifySans-Regular.ttf. Editor loads it by path; a player build can only load Resources,
-    // so a copy at Assets/Resources/Fonts/PixelifySans-Regular.ttf is the fallback.
-    const string PixelifyPath = "Assets/Fonts/PixelifySans-Regular.ttf";
+    // Fonts/PixelifySans-Regular.ttf. Editor loads it by path; a player build can only load Resources,
+    // so a copy at Resources/Fonts/PixelifySans-Regular.ttf is the fallback.
+    const string PixelifyPath = "Fonts/PixelifySans-Regular.ttf";
     const string PixelifyResourcesPath = "Fonts/PixelifySans-Regular";
 
     public static TMP_FontAsset GetPixelifyFont()
@@ -53,18 +53,11 @@ public static class FontFactory
         Font sourceFont = LoadPixelifyFont();
         if (!sourceFont)
         {
-            Debug.LogError($"Font not found at {PixelifyPath}");
+            Debug.LogError($"Font not found at Resources/{PixelifyResourcesPath}");
             return null;
         }
         return TMP_FontAsset.CreateFontAsset(sourceFont);
     }
 
-    static Font LoadPixelifyFont()
-    {
-#if UNITY_EDITOR
-        Font font = UnityEditor.AssetDatabase.LoadAssetAtPath<Font>(PixelifyPath);
-        if (font) return font;
-#endif
-        return Resources.Load<Font>(PixelifyResourcesPath);
-    }
+    static Font LoadPixelifyFont() => Resources.Load<Font>(PixelifyResourcesPath);
 }

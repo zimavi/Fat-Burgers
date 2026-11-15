@@ -1,14 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 // Background music, one track per scene. One persistent AudioSource is created before the first scene loads and survives
 // scene changes. When a scene loads, its track starts (a scene that shares the current track keeps it playing, without a restart).
 // The track loops for as long as the scene is open.
-// shortcut: tracks load through AssetDatabase in the editor only. A player build needs the MP3s under Resources.
 public sealed class MusicPlayer : MonoBehaviour
 {
     // Scene name -> track file name (without the extension). Change the pairs here to move a track to another scene.
@@ -20,7 +16,7 @@ public sealed class MusicPlayer : MonoBehaviour
         { "GameplayScene", "хтонь" },
     };
 
-    const string MusicFolder = "Assets/Music";
+    const string MusicFolder = "Music";
     const float Volume = 0.25f;
 
     AudioSource source;
@@ -65,13 +61,7 @@ public sealed class MusicPlayer : MonoBehaviour
 
     void LoadClips()
     {
-#if UNITY_EDITOR
-        foreach (var guid in AssetDatabase.FindAssets("t:AudioClip", new[] { MusicFolder }))
-        {
-            var clip = AssetDatabase.LoadAssetAtPath<AudioClip>(AssetDatabase.GUIDToAssetPath(guid));
-            if (clip) clips[clip.name] = clip;
-        }
-#endif
-        if (clips.Count == 0) Debug.LogWarning($"MusicPlayer: no tracks found in {MusicFolder}.");
+        foreach (var clip in Resources.LoadAll<AudioClip>(MusicFolder)) clips[clip.name] = clip;
+        if (clips.Count == 0) Debug.LogWarning($"MusicPlayer: no tracks found in Resources/{MusicFolder}.");
     }
 }

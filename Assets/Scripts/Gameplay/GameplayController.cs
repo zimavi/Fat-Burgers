@@ -17,7 +17,6 @@ using UnityEngine.UI;
 // Flying: telemetry, warp, the chute altitude, and a predicted line from the current state (TrajectoryJob, refreshed every 0.5 s).
 // Result: touchdown summary. GameplayBootstrap attaches this when GameplayScene loads, so the scene needs no wiring.
 // Art coordinates are 1920x1080 with y from the top. The stage is shrunk to fit the window.
-// shortcut: art loads through AssetDatabase, so a player build shows a blank panel until the art is moved into Resources.
 // shortcut: knobs step on clicks only, with no hold-to-repeat or wheel.
 public class GameplayController : MonoBehaviour
 {
@@ -50,15 +49,15 @@ public class GameplayController : MonoBehaviour
     static readonly Rect DialKnob = new Rect(1525, 803, 90, 90);            // the dial centre, art coordinates
     static readonly float[] DialAngle = { 90f, 0f, 180f, -90f };           // knob pointer (sprite points right) toward N, E, W, S
 
-    const string PanelPath = "Assets/Sprites/Panel.png";
-    const string NotePath = "Assets/Sprites/StickyNote.png";
-    const string KnobPath = "Assets/Sprites/knob.png";
-    const string InfoIconPath = "Assets/Sprites/info-icon-thick.png";
-    const string LampPath = "Assets/Sprites/Untitled4_20261115002505.png";
-    const string WinPath = "Assets/Sprites/win (1).png";
-    const string FlashPath = "Assets/Sprites/Untitled4_20261115231400.png";
+    const string PanelPath = "Sprites/Panel.png";
+    const string NotePath = "Sprites/StickyNote.png";
+    const string KnobPath = "Sprites/knob.png";
+    const string InfoIconPath = "Sprites/info-icon-thick.png";
+    const string LampPath = "Sprites/Untitled4_20261115002505.png";
+    const string WinPath = "Sprites/win (1).png";
+    const string FlashPath = "Sprites/Untitled4_20261115231400.png";
     static readonly Rect TabRegion = new Rect(1722, 458, 151, 386);  // the lit tab's bounds in stage pixels (top-left origin), with a little margin
-    const string GuidePath = "Assets/Sprites/flight-panel-guide-en.png";
+    const string GuidePath = "Sprites/flight-panel-guide-en.png";
     const int PlotML = 52, PlotMB = 28, PlotMR = 14, PlotMT = 14;  // plot margins in texture pixels
     const int PredictStride = 50;  // predicted samples are 0.01 s apart; the plot and the apogee read every 0.5 s
 
@@ -207,7 +206,7 @@ public class GameplayController : MonoBehaviour
     static RocketData FallbackRocket()
     {
 #if UNITY_EDITOR
-        var sample = UnityEditor.AssetDatabase.LoadAssetAtPath<RocketData>("Assets/Scripts/ScriptableObjects/SampleRocket.asset");
+        var sample = UnityEditor.AssetDatabase.LoadAssetAtPath<RocketData>(ProjectAssets.Full("Scripts/ScriptableObjects/SampleRocket.asset"));
         if (sample) return sample;
 #endif
         Debug.LogWarning("GameplayScene: no rocket from the builder, using a blank RocketData.");
@@ -1320,14 +1319,7 @@ public class GameplayController : MonoBehaviour
         return b;
     }
 
-    static Sprite LoadSprite(string path)
-    {
-#if UNITY_EDITOR
-        foreach (var asset in UnityEditor.AssetDatabase.LoadAllAssetsAtPath(path))
-            if (asset is Sprite s) return s;
-#endif
-        return null;
-    }
+    static Sprite LoadSprite(string path) => ProjectAssets.LoadSprite(path);
 
     // Axis labels for one plot box, from a fixed pool. Positions are texture pixels from the box's bottom-left.
     sealed class Labels

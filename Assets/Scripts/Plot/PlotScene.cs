@@ -8,8 +8,8 @@ using UnityEngine.UI;
 // It plays once, then goes to the mission select. Attached by PlotSceneBootstrap when the Plot scene loads.
 public class PlotScene : MonoBehaviour
 {
-    const string OutsidePath = "Assets/Sprites/IMG_2484.PNG";
-    const string InsidePath = "Assets/Sprites/IMG_2483.PNG";
+    const string OutsidePath = "Sprites/IMG_2484.PNG";
+    const string InsidePath = "Sprites/IMG_2483.PNG";
 
     Image background, fade;
 
@@ -91,14 +91,7 @@ public class PlotScene : MonoBehaviour
         return img;
     }
 
-    static Sprite LoadSprite(string path)
-    {
-#if UNITY_EDITOR
-        foreach (var asset in UnityEditor.AssetDatabase.LoadAllAssetsAtPath(path))
-            if (asset is Sprite s) return s;
-#endif
-        return null;
-    }
+    static Sprite LoadSprite(string path) => ProjectAssets.LoadSprite(path);
 }
 
 // Attaches the plot scene when its scene loads.
