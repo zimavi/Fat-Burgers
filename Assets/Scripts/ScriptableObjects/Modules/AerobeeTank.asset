@@ -17,10 +17,10 @@ MonoBehaviour:
   stackOrder: 0
   specialType: 0
   sprite: {fileID: 923918413883428067, guid: 028e1257bdab7dc499510997554ac80e, type: 3}
-  icon: {fileID: 6700672401504489967, guid: 156812dd0800d82469ca74edea11b0c9, type: 3}
+  icon: {fileID: 6700672401504489967, guid: d70f4899f81fa474e8b08639cef03a05, type: 3}
   description: 'Propellant for the Aerobee 150: red fuming nitric acid and an aniline-based fuel. The two ignite on contact and stay liquid at room temperature, so the engine needs no igniter and no cryogenics.'
   placeholderColor: {r: 0.55, g: 0.65, b: 0.75, a: 1}
-  size: {x: 100, y: 300}
+  size: {x: 120, y: 120}
   mass: 69
   fuelMass: 478
   thrust: 0

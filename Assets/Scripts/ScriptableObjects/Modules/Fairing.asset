@@ -16,11 +16,11 @@ MonoBehaviour:
   isBase: 0
   stackOrder: 100
   specialType: 1
-  sprite: {fileID: -7462471210811838050, guid: e73762996ac854f4b8784b014987f609, type: 3}
-  icon: {fileID: -2005666645161959836, guid: 311e608938581a041b377536d9c5c3b7, type: 3}
+  sprite: {fileID: -2614972829759471883, guid: e73762996ac854f4b8784b014987f609, type: 3}
+  icon: {fileID: 8236453897280053456, guid: 551697d834686224ba467471c7fe171d, type: 3}
   description: Nose cone that shields the payload through the dense lower atmosphere, then falls away once the air is too thin to matter. Every kilogram of it costs altitude.
   placeholderColor: {r: 0.4832681, g: 0.48326808, b: 0.5660378, a: 1}
-  size: {x: 60, y: 240}
+  size: {x: 120, y: 480}
   mass: 4
   fuelMass: 0
   thrust: 0

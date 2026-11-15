@@ -16,8 +16,8 @@ MonoBehaviour:
   isBase: 0
   stackOrder: 0
   specialType: 0
-  sprite: {fileID: 2519356731060597969, guid: 9e8f59057359b35499c7b1766bed0842, type: 3}
-  icon: {fileID: -8891009156502600641, guid: 4490077dda2583649b666568f1c362d3, type: 3}
+  sprite: {fileID: -5905568782741959181, guid: 4b7ffe8b97d632a428bbc1f97d5f3fba, type: 3}
+  icon: {fileID: -8891009156502600641, guid: fb5a0f4dddf76c942893698e0739a564, type: 3}
   description: A solid motor from Canada's Black Brant line, which flew for decades. It burns for about 27 seconds at over 75 kN, and once lit it cannot be throttled or shut off.
   placeholderColor: {r: 0.8018868, g: 0.5145962, b: 0.18534178, a: 1}
   size: {x: 120, y: 360}

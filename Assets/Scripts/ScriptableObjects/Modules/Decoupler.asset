@@ -17,7 +17,7 @@ MonoBehaviour:
   stackOrder: 0
   specialType: 3
   sprite: {fileID: -8368946301128101547, guid: 8317ff180471a3e4e97f8c8fcb37fe64, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 2166998507815652615, guid: d8fdda58f84ab414ab5a099476ebe827, type: 3}
   description: 
   placeholderColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   size: {x: 120, y: 40}

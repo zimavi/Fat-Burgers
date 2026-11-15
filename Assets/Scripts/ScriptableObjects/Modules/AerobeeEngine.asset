@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModuleData
   displayName: AJ10 sustainer (Aerobee 150)
   isBase: 0
-  stackOrder: 0
+  stackOrder: -1
   specialType: 0
-  sprite: {fileID: 923918413883428067, guid: 028e1257bdab7dc499510997554ac80e, type: 3}
-  icon: {fileID: 6700672401504489967, guid: d70f4899f81fa474e8b08639cef03a05, type: 3}
+  sprite: {fileID: -5905568782741959181, guid: 4b7ffe8b97d632a428bbc1f97d5f3fba, type: 3}
+  icon: {fileID: -8891009156502600641, guid: fb5a0f4dddf76c942893698e0739a564, type: 3}
   description: 'The AJ10 sustainer that burns for about 50 seconds. The AJ10 family later went to space: the Apollo service module engine descends from it.'
   placeholderColor: {r: 0.85, g: 0.4, b: 0.2, a: 1}
-  size: {x: 90, y: 50}
+  size: {x: 120, y: 120}
   mass: 60
   fuelMass: 0
   thrust: 12700

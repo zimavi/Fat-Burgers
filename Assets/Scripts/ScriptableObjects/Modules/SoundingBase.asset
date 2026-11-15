@@ -17,7 +17,7 @@ MonoBehaviour:
   stackOrder: 1
   specialType: 0
   sprite: {fileID: 0}
-  icon: {fileID: -5414617196416004988, guid: 347e6b3c46914d54e89b4de95fc67d95, type: 3}
+  icon: {fileID: -5414617196416004988, guid: d39e56c274ecd3f459d229c3862a9807, type: 3}
   description: The spine of the rocket. It carries the thrust from the motors below and the weight of everything above. Structure is dead mass, so each kilogram saved is altitude gained.
   placeholderColor: {r: 0.7, g: 0.4, b: 0.2, a: 1}
   size: {x: 120, y: 0}

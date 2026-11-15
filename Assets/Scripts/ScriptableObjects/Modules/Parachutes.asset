@@ -16,8 +16,8 @@ MonoBehaviour:
   isBase: 0
   stackOrder: 3
   specialType: 2
-  sprite: {fileID: 0}
-  icon: {fileID: 0}
+  sprite: {fileID: -822137135691730196, guid: bd271352b44b4f8408ebd344e4a61ded, type: 3}
+  icon: {fileID: -555869588201914472, guid: b54918624c78bf648ac5697430db44a0, type: 3}
   description: 
   placeholderColor: {r: 0.30890694, g: 0.6792453, b: 0.06728373, a: 1}
   size: {x: 120, y: 40}

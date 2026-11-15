@@ -54,6 +54,10 @@ public class GameplayController : MonoBehaviour
     const string NotePath = "Assets/Sprites/StickyNote.png";
     const string KnobPath = "Assets/Sprites/knob.png";
     const string InfoIconPath = "Assets/Sprites/info-icon-thick.png";
+    const string LampPath = "Assets/Sprites/Untitled4_20261115002505.png";
+    const string WinPath = "Assets/Sprites/win (1).png";
+    const string FlashPath = "Assets/Sprites/Untitled4_20261115231400.png";
+    static readonly Rect TabRegion = new Rect(1722, 458, 151, 386);  // the lit tab's bounds in stage pixels (top-left origin), with a little margin
     const string GuidePath = "Assets/Sprites/flight-panel-guide-en.png";
     const int PlotML = 52, PlotMB = 28, PlotMR = 14, PlotMT = 14;  // plot margins in texture pixels
     const int PredictStride = 50;  // predicted samples are 0.01 s apart; the plot and the apogee read every 0.5 s
@@ -87,13 +91,14 @@ public class GameplayController : MonoBehaviour
     Knob[] knobs = new Knob[3];
     Image[] warpImages = new Image[3];
     Image tabZone, lamp, knobImg, tipBox;
+    RawImage tabFlash;  // the lit tab, shown over the panel's own tab when new advice arrives
     const int ActStage = 0, ActDrogue = 1, ActPayload = 2, ActTest = 3, ActExperiment = 4, ActTransmit = 5;
     readonly Button[] actions = new Button[6];  // the action row along the bottom of the panel, indexed by the Act constants
-    Image expLamp;
+    Image expLamp, txLamp;
     float holdTimer;               // knob hold-to-repeat
     int holdKnob = -1, holdDir;
     TMP_Text header, statusText, devText, speedText, altText, infoText, chuteText, warnText, tipText, noteText, resultText;
-    GameObject resultOverlay;
+    GameObject resultOverlay, winRoot;  // the failed/result text, and the win screen for a completed mission
     GameObject guideRoot;          // the flight panel guide, shown over the panel while open
     readonly float[] warps = { 1f, 5f, 20f };
     int warpIndex;
@@ -144,6 +149,11 @@ public class GameplayController : MonoBehaviour
         BuildEventSystem();
         BuildUi();
         RebakePlan();
+        if (!Story.Seen("gameplay"))
+        {
+            Story.MarkSeen("gameplay");
+            DialogueBox.Play(new[] { Story.ClickInfo, Story.GoodLuck }, null);
+        }
     }
 
     void OnDestroy()
@@ -159,6 +169,7 @@ public class GameplayController : MonoBehaviour
 
     void Update()
     {
+        if (DialogueBox.Active) return;  // the story is on screen: the panel does not respond until it moves on
         if (rebakeTimer >= 0f)
         {
             rebakeTimer -= Time.unscaledDeltaTime;
@@ -400,10 +411,12 @@ public class GameplayController : MonoBehaviour
         float dev = LiveFlight.Deviation(baked, live.Samples);
         string canopy = chute ? "opened" : "did not open";
         string verdict = "<b>TOUCHDOWN</b>", checklist = "";
+        bool won = false;
         if (progress != null)
         {
             var list = MissionEvaluator.Checklist(MissionSession.Mission, progress, rocket, failedMask, MaxAltitude(live.Samples), !live.Broken, last.Speed, live.ProbeFree);
-            verdict = MissionEvaluator.AllMet(list) ? "<b>MISSION COMPLETE</b>" : "<b>MISSION FAILED</b>";
+            won = MissionEvaluator.AllMet(list);
+            verdict = won ? "<b>MISSION COMPLETE</b>" : "<b>MISSION FAILED</b>";
             foreach (var q in list) checklist += $"{(q.Met ? "[x]" : "[ ]")} {q.Text}\n";
             checklist += "\n";
         }
@@ -419,7 +432,9 @@ public class GameplayController : MonoBehaviour
             $"Apogee  {MaxAltitude(live.Samples) / 1000f:0.0} km flown, {MaxAltitude(baked) / 1000f:0.0} km planned\n" +
             $"Max Q  {maxQ / 1000f:0.0} kPa     Max heating  {maxHeat:0.0e0}\n" +
             $"Parachute {canopy}     Deviation at landing  {dev / 1000f:0.0} km";
-        resultOverlay.SetActive(true);
+        // A completed mission gets the win screen; anything else gets the result text.
+        if (won) winRoot.SetActive(true);
+        else resultOverlay.SetActive(true);
     }
 
     void ResetFlight()
@@ -435,6 +450,7 @@ public class GameplayController : MonoBehaviour
         progress = NewProgress();
         reliabilityNote = "";
         resultOverlay.SetActive(false);
+        winRoot.SetActive(false);
         plotDirty = true;
     }
 
@@ -721,8 +737,10 @@ public class GameplayController : MonoBehaviour
         noteX = Mathf.Lerp(noteX, target, 1f - Mathf.Exp(-12f * Time.unscaledDeltaTime));
         noteRect.anchoredPosition = new Vector2(noteX, -NoteRest.y);
         noteRect.gameObject.SetActive(noteX < NoteRest.x + 100f);
-        pulse = Mathf.Max(0f, pulse - Time.unscaledDeltaTime);
-        tabZone.color = new Color(1f, 0.85f, 0f, pulse * 0.35f);
+        // New advice: the lit tab overlay blinks over the panel's own tab for a moment, then goes.
+        pulse = Mathf.Max(0f, pulse - Time.unscaledDeltaTime / 1.5f);
+        float blink = 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 10f);
+        tabFlash.color = new Color(1f, 1f, 1f, pulse * blink);
     }
 
     AdvisorState Snapshot(TrajectorySample c)
@@ -795,6 +813,9 @@ public class GameplayController : MonoBehaviour
         // Experiment lamp: green while the experiment runs, amber once its data is in.
         bool running = progress != null && progress.Running;
         expLamp.color = running ? new Color(0.4f, 1f, 0.4f) : progress != null && progress.DataCollected ? new Color(1f, 0.8f, 0.2f) : Dim;
+        // Transmit lamp: green while the data is going out, amber once it is sent.
+        txLamp.color = progress != null && progress.Transmitting ? new Color(0.4f, 1f, 0.4f)
+            : progress != null && progress.Transmitted ? new Color(1f, 0.8f, 0.2f) : Dim;
         UpdateActions();
 
         string next = AdvisorRules.Pick(Snapshot(c));
@@ -1071,6 +1092,16 @@ public class GameplayController : MonoBehaviour
         if (!art.sprite) art.color = new Color(0.4f, 0.4f, 0.42f);
         art.raycastTarget = false;
 
+        // The lit sticky tab, drawn over the panel's own tab. Only the tab's region of the sprite is shown, so nothing else can flash.
+        // Transparent until new advice makes it blink.
+        var flashSprite = LoadSprite(FlashPath);
+        tabFlash = Place(stage, new Rect(TabRegion.x, TabRegion.y, TabRegion.width, TabRegion.height), "TabFlash").gameObject.AddComponent<RawImage>();
+        tabFlash.texture = flashSprite ? flashSprite.texture : null;
+        tabFlash.uvRect = new Rect(TabRegion.x / 1920f, (1080f - TabRegion.yMax) / 1080f, TabRegion.width / 1920f, TabRegion.height / 1080f);
+        tabFlash.raycastTarget = false;
+        tabFlash.color = Clear;
+        tabFlash.gameObject.SetActive(flashSprite != null);  // no lit-tab art in this build: nothing to flash
+
         // Top bar.
         statusText = MakeText(stage, new Rect(560, 104, 820, 32), 18, font);
         Btn(stage, new Rect(170, 100, 170, 38), "LAUNCH", ButtonBg, Launch, font);
@@ -1128,10 +1159,9 @@ public class GameplayController : MonoBehaviour
         speedText = MakeText(stage, new Rect(SpeedBox.x + 8, SpeedBox.y + 6, SpeedBox.width - 16, SpeedBox.height - 8), 15, font);
         altText = MakeText(stage, new Rect(AltBox.x + 8, AltBox.y + 6, AltBox.width - 16, AltBox.height - 8), 15, font);
 
-        lamp = Place(stage, new Rect(1252, 744, 14, 14), "Lamp").gameObject.AddComponent<Image>();
-        lamp.raycastTarget = false;
-        expLamp = Place(stage, new Rect(1204, 818, 14, 14), "ExpLamp").gameObject.AddComponent<Image>();
-        expLamp.raycastTarget = false;
+        lamp = Lamp(1262, 735);     // chute lamp: over the glyph beside the altitude screen
+        expLamp = Lamp(1210, 825);  // experiment lamp: over the glyph beside the speed screen
+        txLamp = Lamp(1298, 918);   // transmit lamp: over the third glyph
 
         // The action row along the bottom of the panel. Buttons are enabled only when their action is open now.
         string[] labels = { "STAGE", "DROGUE", "PAYLOAD", "TEST", "EXPERIMENT", "TRANSMIT" };
@@ -1157,15 +1187,27 @@ public class GameplayController : MonoBehaviour
         warnText.color = UnsafeColor;
 
         // Result overlay, on top of everything.
-        var overlayRect = Place(stage, new Rect(330, 200, 1260, 420), "Result");
+        // Covers the trajectory and chute screens, so nothing shows through. The text box has room for the whole checklist and log.
+        var overlayRect = Place(stage, new Rect(298, 150, 1408, 800), "Result");
         var overlayImg = overlayRect.gameObject.AddComponent<Image>();
         overlayImg.color = new Color(0.03f, 0.02f, 0.01f, 0.92f);
         resultOverlay = overlayRect.gameObject;
-        resultText = MakeText(overlayRect, new Rect(30, 30, 1200, 290), 18, font);
-        Btn(overlayRect, new Rect(30, 340, 220, 48), "RETRY", ButtonBg, ResetFlight, font);
-        Btn(overlayRect, new Rect(270, 340, 300, 48), "BACK TO BUILDER", ButtonBg, () => SceneManager.LoadScene("BuilderScene"), font);
-        Btn(overlayRect, new Rect(590, 340, 220, 48), "MISSIONS", ButtonBg, () => SceneManager.LoadScene("MissionSelect"), font);
+        resultText = MakeText(overlayRect, new Rect(40, 30, 1330, 540), 16, font);
+        Btn(overlayRect, new Rect(40, 610, 220, 48), "RETRY", ButtonBg, ResetFlight, font);
+        Btn(overlayRect, new Rect(280, 610, 300, 48), "BACK TO BUILDER", ButtonBg, () => SceneManager.LoadScene("BuilderScene"), font);
+        Btn(overlayRect, new Rect(600, 610, 220, 48), "MISSIONS", ButtonBg, () => SceneManager.LoadScene("MissionSelect"), font);
         resultOverlay.SetActive(false);
+
+        // Win screen for a completed mission. Its buttons are printed in the art, so they are placed over the printed words.
+        var win = Place(stage, new Rect(0, 0, 1920, 1080), "Win");
+        var winImg = win.gameObject.AddComponent<Image>();
+        winImg.sprite = LoadSprite(WinPath);
+        winImg.preserveAspect = true;
+        winImg.raycastTarget = false;
+        Btn(win, new Rect(240, 810, 480, 100), null, Clear, () => SceneManager.LoadScene("MissionSelect"), font);  // "Play again"
+        Btn(win, new Rect(1215, 810, 480, 100), null, Clear, Application.Quit, font);                             // "Exit game"
+        winRoot = win.gameObject;
+        winRoot.SetActive(false);
 
         // Info button, top right of the top bar: opens the flight panel guide. A dark backing keeps it readable on any art.
         Panel(new Rect(1690, 96, 48, 48), ButtonBg);
@@ -1216,6 +1258,24 @@ public class GameplayController : MonoBehaviour
         rt.anchoredPosition = new Vector2(r.x, -r.y);
         rt.sizeDelta = new Vector2(r.width, r.height);
         return rt;
+    }
+
+    // A lamp in the style of the panel's glyphs: a light frame, a dark face, and a coloured light in the middle.
+    // Returns the light, which the readouts colour. shortcut: a drawn placeholder; swap in a lamp sprite when one exists.
+    Image Lamp(float cx, float cy)
+    {
+        var frame = Place(stage, new Rect(cx - 18, cy - 30, 36, 60), "LampFrame").gameObject.AddComponent<Image>();
+        frame.sprite = LoadSprite(LampPath);
+        frame.preserveAspect = true;
+        frame.raycastTarget = false;
+        if (!frame.sprite)
+        {
+            frame.color = new Color(0.85f, 0.85f, 0.82f);  // no lamp art: a plain frame
+            Panel(new Rect(cx - 9, cy - 14, 18, 28), new Color(0.15f, 0.13f, 0.11f));
+        }
+        var light = Place(stage, new Rect(cx - 7, cy - 7, 14, 14), "Light").gameObject.AddComponent<Image>();
+        light.raycastTarget = false;
+        return light;
     }
 
     void Panel(Rect r, Color c)

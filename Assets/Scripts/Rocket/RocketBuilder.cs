@@ -124,6 +124,12 @@ public class RocketBuilder : MonoBehaviour
 
         BuildLayout();
         Refresh();
+        // The doctor's first builder line, once per player, as soon as the builder opens.
+        if (!Story.Seen("calculate"))
+        {
+            Story.MarkSeen("calculate");
+            DialogueBox.Play(new[] { Story.Calculate }, null);
+        }
     }
 
     void OnDestroy()
@@ -135,6 +141,17 @@ public class RocketBuilder : MonoBehaviour
     void LaunchMission()
     {
         if (MissionEvaluator.LaunchBlocker(MissionSession.Mission, runtimeRocket) != null) return;
+        if (!Story.Seen("finished"))
+        {
+            Story.MarkSeen("finished");
+            DialogueBox.Play(new[] { Story.Finished }, GoToGameplay);
+            return;
+        }
+        GoToGameplay();
+    }
+
+    void GoToGameplay()
+    {
         MissionSession.Rocket = runtimeRocket;
         MissionSession.RocketTree = rocketRoot;
         MissionSession.PayloadTree = payloadRoot;
