@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModuleData
   displayName: Advanced Communication Module
   isBase: 0
-  isFairing: 0
+  stackOrder: 2
   specialType: 6
-  sprite: {fileID: 0}
-  icon: {fileID: 0}
+  sprite: {fileID: 7904365320086230740, guid: a4b9d8dc24305a347816de09b3db32a8, type: 3}
+  icon: {fileID: -4371357026643054673, guid: a7604dac2fb16fb48b56ba9f36a07cb4, type: 3}
   description: 
-  placeholderColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  placeholderColor: {r: 0.2171591, g: 0.754717, b: 0.54003, a: 1}
   size: {x: 120, y: 40}
   mass: 0.03
   fuelMass: 0
@@ -28,6 +28,9 @@ MonoBehaviour:
   dragCoefficient: 0.5
   referenceArea: 0.01
   scienceValue: 0
+  drogueCdA: 0
+  maxQ: 0
+  maxHeating: 1e+9
   allowedChildren: []
   maxChildren: 0
   maxInstances: 1

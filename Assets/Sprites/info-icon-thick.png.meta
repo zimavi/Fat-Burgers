@@ -1,0 +1,1419 @@
+fileFormatVersion: 2
+guid: e2aae4f4ba9a2e34ca865ce5e414c7af
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8063853498434836019
+    second: info-icon-thick_0
+  - first:
+      213: 4424525734405637302
+    second: info-icon-thick_1
+  - first:
+      213: 5728489256605964822
+    second: info-icon-thick_2
+  - first:
+      213: 6105828931864631641
+    second: info-icon-thick_3
+  - first:
+      213: 6484791528276989649
+    second: info-icon-thick_4
+  - first:
+      213: 8887805493949204432
+    second: info-icon-thick_5
+  - first:
+      213: 5998157024029834192
+    second: info-icon-thick_6
+  - first:
+      213: -6726967922586746647
+    second: info-icon-thick_7
+  - first:
+      213: 542134967019738298
+    second: info-icon-thick_8
+  - first:
+      213: 1325704149256928470
+    second: info-icon-thick_9
+  - first:
+      213: 4909315826530150520
+    second: info-icon-thick_10
+  - first:
+      213: -1307872122818188036
+    second: info-icon-thick_11
+  - first:
+      213: 5977412228300461127
+    second: info-icon-thick_12
+  - first:
+      213: 1649960711366754264
+    second: info-icon-thick_13
+  - first:
+      213: 29743936034820883
+    second: info-icon-thick_14
+  - first:
+      213: 7949419940247028541
+    second: info-icon-thick_15
+  - first:
+      213: 2598234099154046271
+    second: info-icon-thick_16
+  - first:
+      213: 2325077913284859572
+    second: info-icon-thick_17
+  - first:
+      213: -393026700149299697
+    second: info-icon-thick_18
+  - first:
+      213: -869857730751468084
+    second: info-icon-thick_19
+  - first:
+      213: -7929161617781368662
+    second: info-icon-thick_20
+  - first:
+      213: -8326879445958048072
+    second: info-icon-thick_21
+  - first:
+      213: -6973279828965197349
+    second: info-icon-thick_22
+  - first:
+      213: 8870919749421930536
+    second: info-icon-thick_23
+  - first:
+      213: 5011889315740012796
+    second: info-icon-thick_24
+  - first:
+      213: 6285502050502779886
+    second: info-icon-thick_25
+  - first:
+      213: -5993087801549308557
+    second: info-icon-thick_26
+  - first:
+      213: -8089046804016479353
+    second: info-icon-thick_27
+  - first:
+      213: -2243795258604192833
+    second: info-icon-thick_28
+  - first:
+      213: -1227866810488475647
+    second: info-icon-thick_29
+  - first:
+      213: 5181603262424178087
+    second: info-icon-thick_30
+  - first:
+      213: -2026610763407309736
+    second: info-icon-thick_31
+  - first:
+      213: -3418381101224415494
+    second: info-icon-thick_32
+  - first:
+      213: -583098308076373819
+    second: info-icon-thick_33
+  - first:
+      213: -6312750856627053498
+    second: info-icon-thick_34
+  - first:
+      213: 1926114371788238630
+    second: info-icon-thick_35
+  - first:
+      213: -8167474441864370247
+    second: info-icon-thick_36
+  - first:
+      213: -3095855597475751799
+    second: info-icon-thick_37
+  - first:
+      213: -700884408455581869
+    second: info-icon-thick_38
+  - first:
+      213: 1052546723303470202
+    second: info-icon-thick_39
+  - first:
+      213: -2369382888046329312
+    second: info-icon-thick_40
+  - first:
+      213: -3409891999777845797
+    second: info-icon-thick_41
+  - first:
+      213: -660769376891225243
+    second: info-icon-thick_42
+  - first:
+      213: -5484218320858292510
+    second: info-icon-thick_43
+  - first:
+      213: -6890929798036456652
+    second: info-icon-thick_44
+  - first:
+      213: 1830126422013103271
+    second: info-icon-thick_45
+  - first:
+      213: 5546282496737899741
+    second: info-icon-thick_46
+  - first:
+      213: -3204251837370611523
+    second: info-icon-thick_47
+  - first:
+      213: -7229073148115109155
+    second: info-icon-thick_48
+  - first:
+      213: 2465685652096509172
+    second: info-icon-thick_49
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: info-icon-thick_0
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 0
+        width: 1175
+        height: 1191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc92001a7ff671090800000000000000
+      internalID: -8063853498434836019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_1
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 1184
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b482da96b2176d30800000000000000
+      internalID: 4424525734405637302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_2
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 1134
+        width: 137
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61ad3a7c0aeaf7f40800000000000000
+      internalID: 5728489256605964822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_3
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 1126
+        width: 65
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 959181f30134cb450800000000000000
+      internalID: 6105828931864631641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_4
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 1118
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d6996d798b9ef950800000000000000
+      internalID: 6484791528276989649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_5
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 1117
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d78b93d104d75b70800000000000000
+      internalID: 8887805493949204432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_6
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 1131
+        width: 7
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dbff44a80cbd3350800000000000000
+      internalID: 5998157024029834192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_7
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 1105
+        width: 36
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e005ceb05205a2a0800000000000000
+      internalID: -6726967922586746647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_8
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 1091
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab4978151ec068700800000000000000
+      internalID: 542134967019738298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_9
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 1093
+        width: 34
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dc78bd56e8d56210800000000000000
+      internalID: 1325704149256928470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_10
+      rect:
+        serializedVersion: 2
+        x: 915
+        y: 1083
+        width: 25
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 878688acbb4612440800000000000000
+      internalID: 4909315826530150520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_11
+      rect:
+        serializedVersion: 2
+        x: 947
+        y: 1095
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfc29c3db3189dde0800000000000000
+      internalID: -1307872122818188036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_12
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 1087
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 744dcef70c804f250800000000000000
+      internalID: 5977412228300461127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_13
+      rect:
+        serializedVersion: 2
+        x: 1137
+        y: 800
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dfbd5e6686d5e610800000000000000
+      internalID: 1649960711366754264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_14
+      rect:
+        serializedVersion: 2
+        x: 1190
+        y: 840
+        width: 26
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 313d395c3fba96000800000000000000
+      internalID: 29743936034820883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_15
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 730
+        width: 59
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d33c4dc5153025e60800000000000000
+      internalID: 7949419940247028541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_16
+      rect:
+        serializedVersion: 2
+        x: 1156
+        y: 509
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3d426ba528ce0420800000000000000
+      internalID: 2598234099154046271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_17
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 459
+        width: 50
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b653781b06544020800000000000000
+      internalID: 2325077913284859572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_18
+      rect:
+        serializedVersion: 2
+        x: 1214
+        y: 492
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f066b5e6c40bb8af0800000000000000
+      internalID: -393026700149299697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_19
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 482
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccd6e69a005ade3f0800000000000000
+      internalID: -869857730751468084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_20
+      rect:
+        serializedVersion: 2
+        x: 1135
+        y: 439
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa8da75e485f5f190800000000000000
+      internalID: -7929161617781368662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_21
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 404
+        width: 15
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b64b28f24bf07c80800000000000000
+      internalID: -8326879445958048072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_22
+      rect:
+        serializedVersion: 2
+        x: 1212
+        y: 426
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd9f12b01fee93f90800000000000000
+      internalID: -6973279828965197349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_23
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 397
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8289a4f0386db1b70800000000000000
+      internalID: 8870919749421930536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_24
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 389
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf0524e47cecd8540800000000000000
+      internalID: 5011889315740012796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_25
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 371
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee3253b10d69a3750800000000000000
+      internalID: 6285502050502779886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_26
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 373
+        width: 7
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37d3de0b56644dca0800000000000000
+      internalID: -5993087801549308557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_27
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 360
+        width: 16
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 783c6131aceedbf80800000000000000
+      internalID: -8089046804016479353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_28
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 369
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbbf036b9107cd0e0800000000000000
+      internalID: -2243795258604192833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_29
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 360
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 100b75134adb5fee0800000000000000
+      internalID: -1227866810488475647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_30
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 333
+        width: 22
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ad5ccfb6b0c8e740800000000000000
+      internalID: 5181603262424178087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_31
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 306
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 854cf158f3800e3e0800000000000000
+      internalID: -2026610763407309736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_32
+      rect:
+        serializedVersion: 2
+        x: 1141
+        y: 308
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afe2c92ff787f80d0800000000000000
+      internalID: -3418381101224415494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_33
+      rect:
+        serializedVersion: 2
+        x: 1150
+        y: 290
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c8f9fd9d2b68e7f0800000000000000
+      internalID: -583098308076373819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_34
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 306
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64c9333da8a9468a0800000000000000
+      internalID: -6312750856627053498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_35
+      rect:
+        serializedVersion: 2
+        x: 1150
+        y: 273
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62f663fe0deeaba10800000000000000
+      internalID: 1926114371788238630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_36
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 82
+        width: 26
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b7a79ca44d47ae80800000000000000
+      internalID: -8167474441864370247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_37
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 86
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9889d849cbf4905d0800000000000000
+      internalID: -3095855597475751799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_38
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 70
+        width: 36
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35f256d0855f546f0800000000000000
+      internalID: -700884408455581869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_39
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 82
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7431001ba56b9e00800000000000000
+      internalID: 1052546723303470202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_40
+      rect:
+        serializedVersion: 2
+        x: 897
+        y: 82
+        width: 45
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0220c1d11d24e1fd0800000000000000
+      internalID: -2369382888046329312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_41
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 84
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdd8bc6ea41ada0d0800000000000000
+      internalID: -3409891999777845797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_42
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 49
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56b31fba0c974d6f0800000000000000
+      internalID: -660769376891225243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_43
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 53
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ee5d8a6e7424e3b0800000000000000
+      internalID: -5484218320858292510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_44
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 60
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43bf1efbbdf7e50a0800000000000000
+      internalID: -6890929798036456652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_45
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 33
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7acc52ec84ae56910800000000000000
+      internalID: 1830126422013103271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_46
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 31
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd4770a9b8a58fc40800000000000000
+      internalID: 5546282496737899741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_47
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 39
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db8c1a64ee53883d0800000000000000
+      internalID: -3204251837370611523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_48
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 39
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddab847e54c2dab90800000000000000
+      internalID: -7229073148115109155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: info-icon-thick_49
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 25
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f46dfc6900e73220800000000000000
+      internalID: 2465685652096509172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      info-icon-thick_0: -8063853498434836019
+      info-icon-thick_1: 4424525734405637302
+      info-icon-thick_10: 4909315826530150520
+      info-icon-thick_11: -1307872122818188036
+      info-icon-thick_12: 5977412228300461127
+      info-icon-thick_13: 1649960711366754264
+      info-icon-thick_14: 29743936034820883
+      info-icon-thick_15: 7949419940247028541
+      info-icon-thick_16: 2598234099154046271
+      info-icon-thick_17: 2325077913284859572
+      info-icon-thick_18: -393026700149299697
+      info-icon-thick_19: -869857730751468084
+      info-icon-thick_2: 5728489256605964822
+      info-icon-thick_20: -7929161617781368662
+      info-icon-thick_21: -8326879445958048072
+      info-icon-thick_22: -6973279828965197349
+      info-icon-thick_23: 8870919749421930536
+      info-icon-thick_24: 5011889315740012796
+      info-icon-thick_25: 6285502050502779886
+      info-icon-thick_26: -5993087801549308557
+      info-icon-thick_27: -8089046804016479353
+      info-icon-thick_28: -2243795258604192833
+      info-icon-thick_29: -1227866810488475647
+      info-icon-thick_3: 6105828931864631641
+      info-icon-thick_30: 5181603262424178087
+      info-icon-thick_31: -2026610763407309736
+      info-icon-thick_32: -3418381101224415494
+      info-icon-thick_33: -583098308076373819
+      info-icon-thick_34: -6312750856627053498
+      info-icon-thick_35: 1926114371788238630
+      info-icon-thick_36: -8167474441864370247
+      info-icon-thick_37: -3095855597475751799
+      info-icon-thick_38: -700884408455581869
+      info-icon-thick_39: 1052546723303470202
+      info-icon-thick_4: 6484791528276989649
+      info-icon-thick_40: -2369382888046329312
+      info-icon-thick_41: -3409891999777845797
+      info-icon-thick_42: -660769376891225243
+      info-icon-thick_43: -5484218320858292510
+      info-icon-thick_44: -6890929798036456652
+      info-icon-thick_45: 1830126422013103271
+      info-icon-thick_46: 5546282496737899741
+      info-icon-thick_47: -3204251837370611523
+      info-icon-thick_48: -7229073148115109155
+      info-icon-thick_49: 2465685652096509172
+      info-icon-thick_5: 8887805493949204432
+      info-icon-thick_6: 5998157024029834192
+      info-icon-thick_7: -6726967922586746647
+      info-icon-thick_8: 542134967019738298
+      info-icon-thick_9: 1325704149256928470
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

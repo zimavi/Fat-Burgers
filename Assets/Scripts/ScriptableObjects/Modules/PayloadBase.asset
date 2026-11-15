@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModuleData
   displayName: Payload base
   isBase: 1
-  isFairing: 0
+  stackOrder: 1
   specialType: 0
   sprite: {fileID: 0}
   icon: {fileID: 2210224565589994808, guid: e995bd5f4f7144941b6b99f4fa2a9b26, type: 3}
   description: The science deck of the flight. It rides to apogee and back, so every gram here is a gram the motor has to lift.
   placeholderColor: {r: 0.4, g: 0.6, b: 0.9, a: 1}
-  size: {x: 120, y: 40}
+  size: {x: 120, y: 0}
   mass: 5
   fuelMass: 0
   thrust: 0
@@ -28,6 +28,9 @@ MonoBehaviour:
   dragCoefficient: 0.5
   referenceArea: 0.02
   scienceValue: 0
+  drogueCdA: 0
+  maxQ: 0
+  maxHeating: 0
   allowedChildren:
   - {fileID: 11400000, guid: d28a2cdf4305492fa3f40538445bff34, type: 2}
   - {fileID: 11400000, guid: 07ca38727ae243428cf8fe1559b1b714, type: 2}

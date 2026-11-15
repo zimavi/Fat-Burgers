@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModuleData
   displayName: Heat Shield
   isBase: 0
-  isFairing: 0
+  stackOrder: 0
   specialType: 4
   sprite: {fileID: 0}
   icon: {fileID: 0}
   description: 
-  placeholderColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  placeholderColor: {r: 0.6792453, g: 0.5314742, b: 0.11213954, a: 1}
   size: {x: 120, y: 40}
   mass: 100
   fuelMass: 0
@@ -28,6 +28,9 @@ MonoBehaviour:
   dragCoefficient: 1.3
   referenceArea: 0.8
   scienceValue: 0
+  drogueCdA: 0
+  maxQ: 0
+  maxHeating: 1e+9
   allowedChildren: []
   maxChildren: 0
   maxInstances: 0

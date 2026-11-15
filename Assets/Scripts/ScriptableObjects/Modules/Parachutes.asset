@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModuleData
   displayName: Parachutes
   isBase: 0
-  isFairing: 0
+  stackOrder: 3
   specialType: 2
   sprite: {fileID: 0}
   icon: {fileID: 0}
   description: 
-  placeholderColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  placeholderColor: {r: 0.30890694, g: 0.6792453, b: 0.06728373, a: 1}
   size: {x: 120, y: 40}
   mass: 10
   fuelMass: 0
@@ -28,6 +28,9 @@ MonoBehaviour:
   dragCoefficient: 2
   referenceArea: 1.8
   scienceValue: 0
+  drogueCdA: 1
+  maxQ: 0
+  maxHeating: 0
   allowedChildren: []
   maxChildren: 0
   maxInstances: 0

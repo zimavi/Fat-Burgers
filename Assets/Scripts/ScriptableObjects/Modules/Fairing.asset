@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModuleData
   displayName: Fairing
   isBase: 0
-  isFairing: 1
+  stackOrder: 100
   specialType: 1
-  sprite: {fileID: 0}
+  sprite: {fileID: -7462471210811838050, guid: e73762996ac854f4b8784b014987f609, type: 3}
   icon: {fileID: -2005666645161959836, guid: 311e608938581a041b377536d9c5c3b7, type: 3}
   description: Nose cone that shields the payload through the dense lower atmosphere, then falls away once the air is too thin to matter. Every kilogram of it costs altitude.
-  placeholderColor: {r: 0.85, g: 0.85, b: 0.9, a: 1}
-  size: {x: 30, y: 40}
+  placeholderColor: {r: 0.4832681, g: 0.48326808, b: 0.5660378, a: 1}
+  size: {x: 60, y: 240}
   mass: 4
   fuelMass: 0
   thrust: 0
@@ -28,6 +28,9 @@ MonoBehaviour:
   dragCoefficient: 0.5
   referenceArea: 0.05
   scienceValue: 0
+  drogueCdA: 0
+  maxQ: 70000
+  maxHeating: 0
   allowedChildren: []
   maxChildren: 0
   maxInstances: 1

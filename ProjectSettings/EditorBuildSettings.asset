@@ -6,7 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MissionSelect.unity
+    guid: c3a06f226481a32e815adcda6751739e
+  - enabled: 1
     path: Assets/Scenes/BuilderScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/GameplayScene.unity
+    guid: 502be46ba2dfd8e4fa76dfda9924411c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

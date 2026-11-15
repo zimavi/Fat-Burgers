@@ -64,7 +64,7 @@ public static class PitchSolver
     public static float Apogee(RocketData rocket, PlanetData planet, float turnStart, float turnDeg)
     {
         var p = FlightSetup.Params(rocket, planet);
-        var start = FlightSetup.Pad(p, rocket.fuelMass);
+        var start = FlightSetup.Pad(p);
 
         var pitch = new NativeArray<float2>(2, Allocator.TempJob);
         pitch[0] = new float2(turnStart, math.radians(90f));

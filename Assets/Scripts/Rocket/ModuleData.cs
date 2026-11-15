@@ -7,7 +7,8 @@ public class ModuleData : ScriptableObject
 {
     public string displayName = "Module";
     public bool isBase;                              // tree root
-    public bool isFairing;                           // payload fairing, drawn on the sides of the payload stack
+    [Tooltip("Position in the ghost stack: lower sits lower. Equal values keep tree order (base first), so a fairing gets a high value to sit on top.")]
+    public int stackOrder;
     public SpecialModuleType specialType;            // special module type, for gameplay effects
     public Sprite sprite;                            // null = placeholder rectangle in placeholderColor
     public Sprite icon;                              // shown inside the card's circle; the circle stays plain when empty
@@ -22,6 +23,12 @@ public class ModuleData : ScriptableObject
     [Min(0)] public float dragCoefficient = 0.5f;    // Cd
     [Min(0)] public float referenceArea;             // m^2, frontal area
     [Min(0)] public float scienceValue;              // payload score, no physics effect
+    [Tooltip("Drogue drag area, m^2. Deployed at apogee, released when the main canopy opens. Parachute module only. 0 = none.")]
+    [Min(0)] public float drogueCdA;
+    [Tooltip("Dynamic pressure this module survives, Pa. Above it the module is torn off or destroyed for the rest of the flight. 0 = no limit.")]
+    [Min(0)] public float maxQ;
+    [Tooltip("Heating index this module survives. Above it the module burns through or is destroyed for the rest of the flight. 0 = no limit.")]
+    [Min(0)] public float maxHeating;
 
     public ModuleData[] allowedChildren;
     [Tooltip("Most children this node can hold. 0 = one slot per entry in allowedChildren.")]

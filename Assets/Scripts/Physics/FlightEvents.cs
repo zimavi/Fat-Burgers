@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Mathematics;
 
-public enum FlightEventType { MaxQ, MaxHeating, MECO, Apogee, Boundary100km, Impact, Decoupling, FairingJettison, ParachuteDeploy, Reentry }
+public enum FlightEventType { MaxQ, MaxHeating, MECO, Apogee, Boundary100km, Impact, Decoupling, FairingJettison, ParachuteDeploy, Reentry, Liftoff, DrogueDeploy, ProbeSeparation }
 
 public struct FlightEvent
 {
@@ -28,6 +28,9 @@ public static class FlightEvents
         FlightEventType.FairingJettison => "Fairing Jettison",
         FlightEventType.ParachuteDeploy => "Parachute Deploy",
         FlightEventType.Reentry => "Reentry",
+        FlightEventType.Liftoff => "Liftoff",
+        FlightEventType.DrogueDeploy => "Drogue Deploy",
+        FlightEventType.ProbeSeparation => "Probe Separation",
         _ => t.ToString(),
     };
 
@@ -39,10 +42,13 @@ public static class FlightEvents
         FlightEventType.Apogee => "Highest point of the flight. Vertical speed is zero here, so this is where the vehicle stops climbing.",
         FlightEventType.Boundary100km => "Climbing through 100 km, the usual reference for 'space'. A gameplay line, not an atmospheric edge.",
         FlightEventType.Impact => "The vehicle reaches the surface and the flight ends. Downrange here is where it lands.",
-        FlightEventType.Decoupling => "The decoupler fires at burnout and drops the modules attached to it. The vehicle gets lighter.",
+        FlightEventType.Decoupling => "The decoupler fires and drops the booster. A sustainer engine may light in its place.",
+        FlightEventType.ProbeSeparation => "The probe separates from the rocket and flies on alone, on its own parachutes.",
         FlightEventType.FairingJettison => "The payload fairing is dropped after passing 100 km, shedding its mass.",
         FlightEventType.ParachuteDeploy => "Parachutes open on the way down. Their drag slows the vehicle toward a gentler landing.",
         FlightEventType.Reentry => "Descent back through 100 km. Heat shields, if fitted, take the load from here, and the air brakes the vehicle hard.",
+        FlightEventType.Liftoff => "The vehicle leaves the pad: thrust beats weight and it starts climbing.",
+        FlightEventType.DrogueDeploy => "The drogue opens at apogee. It slows the fall so the main canopy opens at a much lower shock.",
         _ => "",
     };
 
@@ -57,6 +63,17 @@ public static class FlightEvents
         var events = new List<FlightEvent>();
         int n = s.Length;
         if (n < 2) return events;
+
+        // Liftoff: first upward crossing of 1 m, so noise on the pad does not count.
+        for (int i = 1; i < n; i++)
+        {
+            float a0 = s[i - 1].Altitude, a1 = s[i].Altitude;
+            if (a0 < 1f && a1 >= 1f)
+            {
+                events.Add(Make(s[i - 1], s[i], (1f - a0) / (a1 - a0), FlightEventType.Liftoff));
+                break;
+            }
+        }
 
         int iq = 0, ih = 0;
         for (int i = 1; i < n; i++)
@@ -88,6 +105,8 @@ public static class FlightEvents
 
         AddFlagEvent(events, s, FlightFlags.Separated, FlightEventType.Decoupling);
         AddFlagEvent(events, s, FlightFlags.Jettisoned, FlightEventType.FairingJettison);
+        AddFlagEvent(events, s, FlightFlags.DrogueOn, FlightEventType.DrogueDeploy);
+        AddFlagEvent(events, s, FlightFlags.ProbeFree, FlightEventType.ProbeSeparation);
         AddFlagEvent(events, s, FlightFlags.ChuteOn, FlightEventType.ParachuteDeploy);
         AddFlagEvent(events, s, FlightFlags.ShieldOn, FlightEventType.Reentry);
 

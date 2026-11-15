@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // Two-tree rocket builder on one shared workspace. Both trees sit in bounding frames placed side by side, so they cannot overlap.
@@ -30,6 +31,8 @@ public class RocketBuilder : MonoBehaviour
     public TrajectoryView trajectory;
     [Tooltip("Supplies the pitch program. Its physical stats are overwritten by the assembled rocket.")]
     public RocketData flightProgram;
+    [Tooltip("Blueprint grid behind the workspace. Assign Assets/Sprites/derevo bg.png.")]
+    public Sprite blueprintBackground;
 
     static readonly Color PanelColor = new Color(0.03f, 0.06f, 0.09f, 0.92f);
     static readonly Color FrameColor = new Color(0.05f, 0.09f, 0.13f, 0.6f);
@@ -52,8 +55,7 @@ public class RocketBuilder : MonoBehaviour
 
     private static TMP_FontAsset TmpFont = null;
     
-    const float GhostAlpha = 0.25f;
-    const float GhostBottom = 80f;   // UI pixels above the bottom of the workspace
+    const float GhostAlpha = 0.45f;
     const float CardWidth = 240f;    // node cards and free slots share this rectangle; the card's circle icon is CardHeight across
     const float CardHeight = 84f;
     const float HGap = 24f;          // between neighbouring columns
@@ -75,7 +77,8 @@ public class RocketBuilder : MonoBehaviour
     PartNode payloadRoot, rocketRoot, selected;
     RocketData runtimeRocket;
     Canvas canvas;
-    RectTransform viewport, world, ghost, availableList, dragLayer;
+    RectTransform viewport, world, availableList, dragLayer;
+    RectTransform payloadGhost, rocketGhost;  // static background stacks: left and right halves of the workspace
     float contentW, contentH;
     bool centered, panning;
 
@@ -84,7 +87,8 @@ public class RocketBuilder : MonoBehaviour
     float targetAltitude = 100000f;  // m
     bool trajectoryMode;
     GameObject targetRow;
-    TextMeshProUGUI toggleLabel, targetLabel, resultLabel;
+    TextMeshProUGUI toggleLabel, targetLabel, resultLabel, missionLabel, launchLabel;
+    Button launchButton;
     Camera cam;
     bool savedOrtho;
     float savedSize;
@@ -113,8 +117,9 @@ public class RocketBuilder : MonoBehaviour
 
         runtimeRocket = ScriptableObject.CreateInstance<RocketData>();
         runtimeRocket.pitchProgram = flightProgram ? flightProgram.pitchProgram : null;
-        payloadRoot = new PartNode(payloadBase, null);
-        rocketRoot = new PartNode(rocketBase, null);
+        // A design from an earlier visit (the gameplay scene, a mission) is kept, so returning here does not start over.
+        payloadRoot = MissionSession.PayloadTree ?? new PartNode(payloadBase, null);
+        rocketRoot = MissionSession.RocketTree ?? new PartNode(rocketBase, null);
         selected = rocketRoot;
 
         BuildLayout();
@@ -123,7 +128,18 @@ public class RocketBuilder : MonoBehaviour
 
     void OnDestroy()
     {
-        if (runtimeRocket) Destroy(runtimeRocket);
+        if (runtimeRocket && runtimeRocket != MissionSession.Rocket) Destroy(runtimeRocket);  // a handed-over rocket lives on in the gameplay scene
+    }
+
+    // Hands the rocket to the gameplay scene. The mission, if any, travels in MissionSession.
+    void LaunchMission()
+    {
+        if (MissionEvaluator.LaunchBlocker(MissionSession.Mission, runtimeRocket) != null) return;
+        MissionSession.Rocket = runtimeRocket;
+        MissionSession.RocketTree = rocketRoot;
+        MissionSession.PayloadTree = payloadRoot;
+        MissionSession.Planet = trajectory ? trajectory.planet : null;
+        SceneManager.LoadScene("GameplayScene");
     }
 
     void BuildLayout()
@@ -140,10 +156,17 @@ public class RocketBuilder : MonoBehaviour
 
         var root = (RectTransform)canvasGo.transform;
 
-        // Workspace: the mask clips it, the ghost stays put in the background, and the world pans and zooms.
+        // Workspace: the mask clips it, and the world pans and zooms. The blueprint grid sits behind everything.
         viewport = MakePanel(root, new Vector2(0f, 0f), new Vector2(0.75f, 1f), "Workspace", PanelColor);
         viewport.gameObject.AddComponent<RectMask2D>();
-        ghost = MakePanel(viewport, Vector2.zero, Vector2.one, "Ghost", null);
+        if (blueprintBackground)
+        {
+            var grid = viewport.GetComponent<Image>();
+            grid.sprite = blueprintBackground;
+            grid.color = Color.white;
+        }
+        payloadGhost = GhostRoot(viewport, 0.25f);  // static: not inside the world, so it does not pan or zoom
+        rocketGhost = GhostRoot(viewport, 0.75f);
         world = NewRect(viewport, "World", new Vector2(0.5f, 0.5f));
 
         // Available panel: a ScrollRect whose content grows with the list. The panel is also the drop target for detaching nodes.
@@ -180,6 +203,9 @@ public class RocketBuilder : MonoBehaviour
         barFit.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
 
         toggleLabel = MakeButton(Row(toolbar), "Trajectory", ButtonColor, ToggleTrajectory);
+        launchLabel = MakeButton(Row(toolbar), "Launch to gameplay", ButtonColor, LaunchMission);
+        launchButton = launchLabel.GetComponentInParent<Button>();
+        MakeButton(Row(toolbar), "Missions", ButtonColor, () => SceneManager.LoadScene("MissionSelect"));
         var targets = Row(toolbar);
         targetRow = targets.gameObject;
         MakeButton(targets, "-100 km", ButtonColor, () => AdjustTarget(-100f));
@@ -191,6 +217,11 @@ public class RocketBuilder : MonoBehaviour
         resultLabel.gameObject.AddComponent<LayoutElement>().preferredWidth = 460f;  // wrap long results instead of widening the bar
         targetRow.SetActive(false);
         resultLabel.gameObject.SetActive(false);
+        missionLabel = Label(toolbar, "", 14f);
+        missionLabel.gameObject.AddComponent<LayoutElement>().preferredWidth = 460f;
+        missionLabel.text = MissionSession.Mission
+            ? $"<b>{MissionSession.Mission.title}</b>\n{MissionSession.Mission.briefing}{MissionEvaluator.ModuleStatus(MissionSession.Mission)}"
+            : "<b>Free flight</b>  no mission, no objectives.";
 
         dragLayer = MakePanel(root, Vector2.zero, Vector2.one, "DragLayer", null);  // so dragged cards draw on top
         BuildTooltip(root);  // last, so the tooltip draws over everything
@@ -334,7 +365,7 @@ public class RocketBuilder : MonoBehaviour
     void Refresh()
     {
         HideTooltip();  // the cards it was hovering are about to be destroyed
-        RocketAssembly.Apply(new[] { rocketRoot, payloadRoot }, runtimeRocket);
+        RocketAssembly.Apply(rocketRoot, payloadRoot, runtimeRocket);
         if (trajectory)
         {
             trajectory.rocket = runtimeRocket;
@@ -356,9 +387,19 @@ public class RocketBuilder : MonoBehaviour
             centered = true;
         }
 
+        DrawStack(payloadGhost, payloadRoot);
+        DrawStack(rocketGhost, rocketRoot);
         Clear(availableList);
         DrawAvailable();
-        DrawGhost();
+        UpdateLaunchGate();
+    }
+
+    // Launch stays blocked until the mission's requirement is met, and the button says what is missing.
+    void UpdateLaunchGate()
+    {
+        string blocker = MissionEvaluator.LaunchBlocker(MissionSession.Mission, runtimeRocket);
+        launchButton.interactable = blocker == null;
+        launchLabel.text = blocker ?? "Launch to gameplay";
     }
 
     // One tree in a bounding frame. The frame's left edge sits at left, in world space.
@@ -570,51 +611,48 @@ public class RocketBuilder : MonoBehaviour
         Refresh();
     }
 
-    // Ghost of the whole stack: fairings behind the payload, payload above the sounding rocket, all near-transparent.
-    void DrawGhost()
+    // Anchored at the middle of its half of the workspace, with the stack's bottom-centre at the anchor.
+    static RectTransform GhostRoot(Transform parent, float anchorX)
     {
-        Clear(ghost);
-        var rocketStack = rocketRoot.Walk().Select(n => n.data).ToList();
-        var payloadStack = payloadRoot.Walk().Select(n => n.data).Where(d => !d.isFairing).ToList();
-        var fairings = payloadRoot.Walk().Select(n => n.data).Where(d => d.isFairing).ToList();
-
-        float rocketTop = GhostBottom + rocketStack.Sum(d => d.size.y);
-        float payloadHeight = payloadStack.Sum(d => d.size.y);
-        float payloadWidth = payloadStack.Select(d => d.size.x).DefaultIfEmpty(0f).Max();
-
-        int side = -1;
-        foreach (var f in fairings)
-        {
-            Ghost(f, side * (payloadWidth + f.size.x) / 2f, rocketTop, new Vector2(f.size.x, payloadHeight));
-            side = -side;
-        }
-
-        float y = rocketTop;
-        foreach (var d in payloadStack)
-        {
-            Ghost(d, 0f, y, d.size);
-            y += d.size.y;
-        }
-
-        y = GhostBottom;
-        foreach (var d in rocketStack)
-        {
-            Ghost(d, 0f, y, d.size);
-            y += d.size.y;
-        }
+        var r = NewRect(parent, "Ghost", new Vector2(0.5f, 0f));
+        r.anchorMin = r.anchorMax = new Vector2(anchorX, 0.5f);
+        return r;
     }
 
-    void Ghost(ModuleData m, float x, float y, Vector2 size)
+    // Rebuilds one tree's static ghost, centred vertically in its half.
+    static void DrawStack(RectTransform ghostRoot, PartNode root)
+    {
+        Clear(ghostRoot);
+        float height = StackGhost(ghostRoot, root.Walk().Select(n => n.data));
+        ghostRoot.anchoredPosition = new Vector2(0f, -height / 2f);
+    }
+
+    // Modules stacked bottom-up by stackOrder. OrderBy is stable, so equal orders keep tree order (base first). Returns the stack height.
+    static float StackGhost(Transform parent, IEnumerable<ModuleData> modules)
+    {
+        float y = 0f;
+        foreach (var d in modules.OrderBy(d => d.stackOrder))
+        {
+            GhostImage(parent, d, 0f, y, d.size);
+            y += d.size.y;
+        }
+        return y;
+    }
+
+    // Positions are relative to the bottom-centre of parent.
+    static void GhostImage(Transform parent, ModuleData m, float x, float y, Vector2 size)
     {
         var go = new GameObject(m.displayName, typeof(RectTransform), typeof(Image));
-        go.transform.SetParent(ghost, false);
+        go.transform.SetParent(parent, false);
         var rect = (RectTransform)go.transform;
-        rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0.5f, 0f);
+        rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0f);
+        rect.pivot = new Vector2(0.5f, 0f);
         rect.anchoredPosition = new Vector2(x, y);
         rect.sizeDelta = size;
 
         var img = go.GetComponent<Image>();
         img.sprite = m.sprite;
+        img.preserveAspect = true;
         Color c = m.sprite ? Color.white : m.placeholderColor;
         img.color = new Color(c.r, c.g, c.b, GhostAlpha);
         img.raycastTarget = false;
@@ -735,6 +773,11 @@ public class RocketBuilder : MonoBehaviour
         Clear(tooltipRect);
         Label(tooltipRect, $"<b>{Colored(m)}</b>", 20f);
         if (!string.IsNullOrWhiteSpace(m.description)) Label(tooltipRect, m.description, 14f).color = SlotText;
+        if (Array.IndexOf(ReliabilityStore.Rolled, m.specialType) >= 0)
+        {
+            var t = m.specialType;
+            Label(tooltipRect, $"Reliability {ReliabilityStore.Get(t):0}%. Last flight: {ReliabilityStore.LastText(t)}.", 14f).color = SlotText;
+        }
 
         var items = StatItems(m);
         for (int i = 0; i < items.Count; i += 3)

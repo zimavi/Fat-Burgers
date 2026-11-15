@@ -21,7 +21,7 @@ public static class ChuteSolver
     public static Result Solve(RocketData rocket, PlanetData planet, NativeArray<float2> pitch)
     {
         var p = FlightSetup.Params(rocket, planet);
-        var start = FlightSetup.Pad(p, rocket.fuelMass);
+        var start = FlightSetup.Pad(p);
         var best = new Result { Altitude = rocket.chuteDeployMin, ImpactSpeed = float.MaxValue, PeakQ = float.MaxValue };
         bool bestOk = false;
 

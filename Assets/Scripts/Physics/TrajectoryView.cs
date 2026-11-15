@@ -64,7 +64,7 @@ public class TrajectoryView : MonoBehaviour
 
         var p = FlightSetup.Params(rocket, planet);
         if (p.ChuteCdA > 0f) p.ChuteDeployAltitude = ChuteSolver.Solve(rocket, planet, pitch).Altitude;  // best parachute opening for this flight
-        var start = FlightSetup.Pad(p, rocket.fuelMass);
+        var start = FlightSetup.Pad(p);
         var samples = new NativeList<TrajectorySample>(1024, Allocator.TempJob);
 
         new TrajectoryJob { P = p, Pitch = pitch, Start = start, Samples = samples }.Schedule().Complete();

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModuleData
   displayName: Decoupler
   isBase: 0
-  isFairing: 0
+  stackOrder: 0
   specialType: 3
-  sprite: {fileID: 0}
+  sprite: {fileID: -8368946301128101547, guid: 8317ff180471a3e4e97f8c8fcb37fe64, type: 3}
   icon: {fileID: 0}
   description: 
   placeholderColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -28,6 +28,9 @@ MonoBehaviour:
   dragCoefficient: 0.5
   referenceArea: 0
   scienceValue: 0
+  drogueCdA: 0
+  maxQ: 0
+  maxHeating: 0
   allowedChildren:
   - {fileID: 11400000, guid: 6c170218fd6c4edc98e4eadb95b84abe, type: 2}
   - {fileID: 11400000, guid: 47cad25bcf824ca69bd2b43f6487f8ba, type: 2}

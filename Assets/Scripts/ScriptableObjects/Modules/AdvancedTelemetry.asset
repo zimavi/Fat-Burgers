@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ModuleData
   displayName: Advanced Telemetry Module
   isBase: 0
-  isFairing: 0
+  stackOrder: 2
   specialType: 5
-  sprite: {fileID: 0}
-  icon: {fileID: 0}
+  sprite: {fileID: 2694854679108103488, guid: a4a918f3733b934439a30ff733e118be, type: 3}
+  icon: {fileID: -2005666645161959836, guid: 881feab827f8daf48bc5243d165d50f5, type: 3}
   description: 
   placeholderColor: {r: 0.26237094, g: 0.6899552, b: 0.8301887, a: 1}
   size: {x: 120, y: 40}
@@ -28,6 +28,9 @@ MonoBehaviour:
   dragCoefficient: 0.5
   referenceArea: 0.01
   scienceValue: 3
+  drogueCdA: 0
+  maxQ: 0
+  maxHeating: 0
   allowedChildren: []
   maxChildren: 0
   maxInstances: 1
